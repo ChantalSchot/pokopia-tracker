@@ -1,0 +1,119 @@
+
+help me create a prompt for the Claude Sonnet model to generate a fully working web application as described below. The AI should generate everything, including readme/documentation, repository structure, front-end + back-end application, dockerfiles for everything needed, data importer, logic for all the functionalities, tests, configuration, setup instructions, and documentation for architecture, data models and api endpoints.
+
+Your output should be a complete prompt downloadable as pdf, markdown or .docx. Make sure to include a "2-phase" step: phase one to check assumptions, contradictions, unclear points and decisions, phase 2 (code generation) only after confirmation.
+
+- name: pokopia-tracker
+- functionality: keep an overview of your pokémon in pokopia, which houses you have, plan and organise pokémon in houses based on which types and "favourites" work well together, move pokémon between houses/regions, add/update houses, track progress, and manage related data in a user-friendly way
+
+Data: large database with 
+    - all pokémon in pokopia, including their details 
+    - housing-kits
+    - items
+    - favourites
+    - habitats
+    - specialties
+    - users
+    - houses (created by + linked through user id)
+
+    - houses can get an idealHabitat as well as items linked to it (visibly split between type decoration, relaxation, toy or no type)
+    - houses have a list of favourites that are present in that house based on the items there
+    - houses must be assigned to a single region
+    - pokemon number is a string, e.g. #001
+    - users have list of houses and an array of "registered" pokémon (based on pokémon ids)
+    - entities should all have an "id" property, which should be a random uuid. If the id property does not exist within the original json file, make sure it is automatically generated and added through spring data jpa
+    - habitats have linked "pokemon ids" based on the "number" property from each pokemon (e.g. array list including "#001")
+    - the only options for "idealHabitat" are those found in the idealHabitat property in the pokemon.json file (should be a string enum)
+    - pokemon always have exactly 6 favourites, of which one (flavour) does NOT have items linked to it (in-game, these are certain types of food you can give to the pokemon, not static items)
+
+Technical:
+- postgres database
+- Java Spring Boot back-end (with spring security / JPA)
+- Angular (with materials) front-end
+- WCAG-guidelines for accessibility should be followed
+- website should be responsive, so also friendly for mobile view width
+- layout should be modern and in "pokopia-style" regarding colours, fonts, look and feel etc, based on the provided assets/data, while still being clean, accessible and polished
+- database should run in docker and a dockerfile / docker setup should be added for everything needed
+- back-end and front-end should NOT run on default ports for java/angular; choose explicit non-default ports and document them
+- use enums where applicable
+- all endpoints apart from the login/register ones require authentication
+- use role-based authorization for user/admin functionality
+- include proper validation, error handling and loading states in both front-end and back-end
+- include documentation for architecture, repository structure, entity relationships, rest api endpoints, setup, configuration and import flow
+
+Functionalities for a normal user are:
+- create account (when not logged in)
+- login, logout, change password, change details (username, email, password). Login through email+password. Users can change their username, but username has to be unique within the database. Email cannot be registered twice. do not implement 2FA in v1, but design extensibility for it
+- see a dashboard page with overview of all pokémon registered (x out of total), which of the registered ones are housed (number assigned to house), and a list of registered that are not assigned to a house yet (homeless)
+- look at a list of all available pokémon in a "pokédex" page (with "cards" for each pokemon, not a table)
+- look at details of the pokémon by opening that pokémon's modal
+- filter or sort these pokémon in the pokédex, based on most properties (e.g. type, assigned house, specialties, litterDrop, favourites, idealHabitat, rarity, isEvent, assigned region (based on which house they're in), house type (e.g. all pokemon currently in 'habitat' type houses) etc)
+- track which pokémon are registered, by toggling a "registered" boolean for that pokémon
+- registered pokémon should be visually distinct from non-registered ones in the pokédex cards
+- create, edit or delete a house (either "habitat", "custom" or based on housing kit) (changing region will make the pokémon in that house homeless, as they won't directly change region automatically)
+- houses with type 'habitat' are just a house type that references a habitat record and gets information (e.g. size) from there (no other relation to it)
+- houses with type 'housing-kit' are just a house type that references the housing kit and gets information (e.g. size) from there upon creation (no other relation to it)
+- houses should always be linked to exactly one of the available regions
+- houses should have a name + description that the user can add, name should be unique per user within a region
+- assign pokémon to houses (max is based on "size" of the housing kit, 4 for custom houses or 1 for habitats), a pokemon can only be assigned to 1 house at a time. Multiple pokemon can be assigned to a single house at the same time (this could remove them from another house if they were already assigned there)
+- assign items to houses, which will then show which "favourites" are "present" in that house (many items can be assigned to many houses)
+- assign an "ideal habitat type" to houses, based on available types from the "idealHabitat" property for pokemon (this is unrelated to the "habitats" that pokemon can be found in)
+- move pokémon between houses or remove them from a house
+- house name, description, assigned pokemon/items, idealHabitat type etc can be edited by user. Width/depth/height can only be edited for custom houses, not for habitat or housing-kit houses. Size can never be edited.
+- deleting a house will make the pokémon in that house "homeless"
+- items can be linked to houses. this will show item list along with corresponding "favourite" that can be added (not by manually typing), and can also be filtered to find all items for a specific favourite (one or multiple at the same time)
+- see suggested pokémon to add to a house, based on the "favourites" present in that house and their idealHabitat (only suggest pokemon that have the same idealHabitat as the house). If no items are present yet, match based on pokémon idealHabitat + favourites of pokémon that are already in that house. If house is full (max size === assigned pokemon), no suggestions should be shown. The final prompt should tell Claude to make this logic explicit and document edge cases
+- if NONE of the favourites of a specific pokemon assigned to a house is "active" within that house, it should be visible with a warning icon/colour
+- see a list of houses, with filter of "region", on "available" spots (only show houses that have not reached number of pokémon equal to max house size), and on favourites
+- see list of items, which can be filtered by favourites to which the items belong, as well as to "tag" and "category"
+- see list of unique habitats, filter based on whether all pokemon within that habitat have been registered or not. Visual distinction when all pokemon within a habitat have been registered
+- user can edit their personal data as well as their houses, which items/pokemon are added to houses, which pokemon they have found. They cannot directly edit any of the imported master data from other tables in the database
+- where applicable, sprites/images should be used for pokémon, habitats, items, housing-kits and specialties
+
+Pages in front-end:
+- login/homepage (default page when not logged in)
+- dashboard
+- pokédex (can assign houses to pokemon here too)
+- houses (with modal to view + edit details)
+- items
+- habitats (extra habitat detail on hover?)
+- profile
+
+Admin user role:
+In addition, there should be an "admin" role (for first admin, i'll manually edit this in my database for my own account). Admin should have expanded functionality in additional admin-pages:
+- reload data from json files based on api call, either all data or specific table
+- view, edit, add, delete existing users (including adding/removing admin role)
+- view, edit, add or delete other data that normal users can't edit: pokemon, habitats, items, favourites, specialties and housing-kits, as well as generate a new .json file based on current data for any of these data types
+- admin page(s) are not visible for users without admin role
+
+Extra notes:
+- in the front-end visible text, pokemon should always be written as 'Pokémon' (with or without capital). In all code/classes etc, it should always just be "pokemon" with normal e instead of é (unless it is a comment in the code). Same rule for pokédex
+- correct error handling in both front-end and back-end
+- datasets (pokemon, habitats, housing-kits, favourites, specialties and items) should be loaded in once. afterwards, only admin can change or reload data
+- web page should contain a menu bar at the top (collapsed hamburger in mobile view)
+- filters (e.g. on housing and pokedex pages) should be fixed to right side and scrollable separate from content grid
+- for all data models, include validation rules, relationships, constraints, enums and clear mapping between imported json data and database entities
+- claude should make sure to include clear documentation for authentication/authorization approach, rest api structure, repository structure, setup steps, docker usage, local development, test strategy, and sample environment/config values
+- ensure documentation of:
+  - API contract/endpoints
+  - validation rules, busines rules, edge cases
+  - seed/import flow from json + asset folder handling
+  - tests should be included for both backend and frontend
+  - setup/run instructions should be listed in readme for both docker and non-docker local development
+
+For the prompt, add any other relevant data related to readme, documentation, data models, security, accessibility, testing, authentication, rest api endpoints, repository structure, quality guidelines, configuration, and any other relevant information for fully building a good quality web application with frontend, backend and corresponding database. See also attached resources, which includes (for background info / data models):
+
+Input json files:
+- favourites.json
+- habitats.json
+- housing-kits.json
+- items.json
+- pokemon.json
+- specialties.json
+
+Input for assets folders (these include all png files listed in the imagePath and spritePath properties), folders should have the following names:
+- habitats
+- housing-kits
+- items
+- pokemon
+- specialties

@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Appraise",
+    "description": "You can show lost relics you've found to Professor Tangrowth, who will appraise them for you",
+    "imagePath": "assets/specialties/appraise.png"
+  },
+  {
+    "name": "Build",
+    "description": "Pokémon with the Build specialty will lead your building projects",
+    "imagePath": "assets/specialties/build.png"
+  },
+  {
+    "name": "Bulldoze",
+    "description": "Pokémon with the Bulldoze specialty can lead your demolition, rebuilding or relocation projects",
+    "imagePath": "assets/specialties/bulldoze.png"
+  },
+  {
+    "name": "Burn",
+    "description": "Pokémon with the Burn specialty can set fire to Flammable objects. They can also turn Squish clay into Brick",
+    "imagePath": "assets/specialties/burn.png"
+  },
+  {
+    "name": "Chop",
+    "description": "Pokémon with the Chop specialty can process small logs into lumber",
+    "imagePath": "assets/specialties/chop.png"
+  },
+  {
+    "name": "Collect",
+    "description": "Pokémon with the Collect specialty will trade you rare things for certain items",
+    "imagePath": "assets/specialties/collect.png"
+  },
+  {
+    "name": "Crush",
+    "description": "Pokémon with the Crush specialty can mash materials into different things",
+    "imagePath": "assets/specialties/crush.png"
+  },
+  {
+    "name": "DJ",
+    "description": "DJ Rotom can use the DJ specialty to play music CDs for you",
+    "imagePath": "assets/specialties/dj.png"
+  },
+  {
+    "name": "Dream Island",
+    "description": "Pokémon with the Dream Island specialty can transport you to a Dream Island",
+    "imagePath": "assets/specialties/dreamisland.png"
+  },
+  {
+    "name": "Eat",
+    "description": "Mosslax has the Eat specialty. Something good may happen if you offer them food",
+    "imagePath": "assets/specialties/eat.png"
+  },
+  {
+    "name": "Engineer",
+    "description": "Tinkmaster has the Engineer specialty and can lead huge building projects",
+    "imagePath": "assets/specialties/engineer.png"
+  },
+  {
+    "name": "Explode",
+    "description": "Pokémon with the Explode specialty can be fired out of a cannon, destroying everything around them on impact",
+    "imagePath": "assets/specialties/explode.png"
+  },
+  {
+    "name": "Fly",
+    "description": "Pokémon with the Fly spceialty can fly you to a Pokémon you're searching fo",
+    "imagePath": "assets/specialties/fly.png"
+  },
+  {
+    "name": "Gather",
+    "description": "Pokémon with the Gather specialty will pick up items on the ground and put them inside a community box",
+    "imagePath": "assets/specialties/gather.png"
+  },
+  {
+    "name": "Gather Honey",
+    "description": "Pokémon with the Gather Honey specialty will give you special furniture if you bring them honey",
+    "imagePath": "assets/specialties/gatherhoney.png"
+  },
+  {
+    "name": "Generate",
+    "description": "Pokémon with the Generate specialty can power machines with electricty",
+    "imagePath": "assets/specialties/generate.png"
+  },
+  {
+    "name": "Grow",
+    "description": "Pokémon with the Grow specialty can make plants grow faster",
+    "imagePath": "assets/specialties/grow.png"
+  },
+  {
+    "name": "Hype",
+    "description": "Pokémon with the Hype specialty will start dancing when they hear music, improving the mood",
+    "imagePath": "assets/specialties/hype.png"
+  },
+  {
+    "name": "Illuminate",
+    "description": "Peakychu can use the Illuminate specialty to light up the whole town for you",
+    "imagePath": "assets/specialties/illuminate.png"
+  },
+  {
+    "name": "Litter",
+    "description": "Pokémon with the Litter specialty will drop useful materials near their homes",
+    "imagePath": "assets/specialties/litter.png"
+  },
+  {
+    "name": "Paint",
+    "description": "Smearguru has the Paint specialty and can recolor certain items, such as furniture",
+    "imagePath": "assets/specialties/paint.png"
+  },
+  {
+    "name": "Party",
+    "description": "Chef Dente can use the Party specialty to help you prepare food for parties",
+    "imagePath": "assets/specialties/party.png"
+  },
+  {
+    "name": "Rarify",
+    "description": "Pokémon with the Rarify specialty can turn Star Pieces into rare Pok&eacute;metal",
+    "imagePath": "assets/specialties/rarify.png"
+  },
+  {
+    "name": "Recycle",
+    "description": "Pokémon with the Recycle specialty can process nonburnable garbage into iron ore and wastepaper into paper",
+    "imagePath": "assets/specialties/recycle.png"
+  },
+  {
+    "name": "Search",
+    "description": "Pokémon with the Search specialty can help you find buried items",
+    "imagePath": "assets/specialties/search.png"
+  },
+  {
+    "name": "Storage",
+    "description": "Pokémon with the Storage specialty can hold on to your items for you",
+    "imagePath": "assets/specialties/storage.png"
+  },
+  {
+    "name": "Teleport",
+    "description": "Pokémon with the Teleport specialty can instantly take you to a Pokémon you're searching for",
+    "imagePath": "assets/specialties/teleport.png"
+  },
+  {
+    "name": "Trade",
+    "description": "Pokémon with the Trade speicalty can exchange items with you at a cash register",
+    "imagePath": "assets/specialties/trade.png"
+  },
+  {
+    "name": "Transform",
+    "description": "Ditto can improve its moves by using Transform",
+    "imagePath": "assets/specialties/transform.png"
+  },
+  {
+    "name": "Water",
+    "description": "Pokémon with the Water specialty can use a full water basin to spray water on nearby fields and plants",
+    "imagePath": "assets/specialties/water.png"
+  },
+  {
+    "name": "Yawn",
+    "description": "Pokémon with the Yawn specialty can tell you how humid it is",
+    "imagePath": "assets/specialties/yawn.png"
+  }
+]

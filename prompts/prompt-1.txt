@@ -1,0 +1,766 @@
+You are a senior full-stack architect and implementation engineer. Generate a complete, fully working, production-quality monorepo web application called `pokopia-tracker`.
+
+Your task is to generate EVERYTHING needed for a working application, not just examples or partial scaffolding. The output must be a complete repository with backend, frontend, database configuration, seed/import logic, Docker setup, documentation, tests, and implementation of the required business rules.
+
+The app is for tracking Pokémon in Pokopia: what Pokémon a user has registered, which houses they own, how Pokémon are assigned to houses, which favourites are active in a house based on items, and which Pokémon are suggested for a house based on idealHabitat and favourites.
+
+IMPORTANT:
+- Visible UI text must always use “Pokémon” and “Pokédex” with accents.
+- In code, file names, classes, variables, database fields, API routes, DTOs, etc., always use normal ASCII forms: `pokemon`, `pokedex`.
+- Do not output pseudocode, placeholders, “TODO”, or unfinished sections.
+- Generate real implementation code.
+- Where a requirement is ambiguous, choose a sensible robust implementation and document the choice in the README and architecture docs.
+- Use enums where applicable.
+- Follow accessibility best practices and WCAG-oriented implementation.
+- Make the UI modern, responsive, and visually inspired by a cozy “Pokopia-style” aesthetic.
+- Do not use default Angular or Spring Boot ports.
+- Use PostgreSQL.
+- Use Java Spring Boot with Spring Security and Spring Data JPA.
+- Use Angular with Angular Material.
+- Use Docker/Docker Compose for local development and deployment.
+
+--------------------------------------------------
+PROJECT NAME
+--------------------------------------------------
+
+Repository / app name:
+- pokopia-tracker
+
+--------------------------------------------------
+TECH STACK
+--------------------------------------------------
+
+Backend:
+- Java 21
+- Spring Boot
+- Spring Security
+- Spring Data JPA / Hibernate
+- PostgreSQL
+- Flyway or Liquibase for schema migrations
+- Bean Validation
+- MapStruct optional but preferred
+- JWT-based authentication
+- Role-based authorization
+- Mail support for account activation emails
+- 2FA support may be implemented as optional TOTP using authenticator apps; if included, make it feature-flagged and properly documented
+
+Frontend:
+- Angular (current stable)
+- Angular Material
+- SCSS
+- Responsive layout
+- Accessible components
+- Strong typing
+- Route guards
+- State management may use signals/services or NgRx if justified; choose the simplest robust option
+
+Infra:
+- Dockerfiles for frontend, backend, and database-related setup if needed
+- docker-compose.yml for local startup
+- Non-default ports for frontend and backend
+- .env.example files
+- reverse proxy optional if helpful; if used, include config and document it
+
+Testing:
+- Backend unit tests + integration tests
+- Frontend unit tests
+- A small set of meaningful end-to-end tests if feasible
+- Test data strategy documented
+
+--------------------------------------------------
+REQUIRED OUTPUT
+--------------------------------------------------
+
+Generate a complete repository containing at least:
+
+1. Root README.md
+2. Detailed architecture/design documentation
+3. Full repository structure
+4. Backend Spring Boot application
+5. Frontend Angular application
+6. PostgreSQL schema and migrations
+7. Data importer / seed loader for provided JSON datasets
+8. Dockerfiles and docker-compose.yml
+9. Environment configuration examples
+10. API documentation
+11. Security documentation
+12. Accessibility notes
+13. Testing strategy and test implementations
+14. Error handling strategy
+15. Scripts for local setup and running
+16. Admin import/export functionality
+17. JSON export generation for admin-managed datasets
+
+Also generate:
+- sensible package/module organization
+- DTOs
+- entities
+- repositories
+- services
+- controllers
+- mappers
+- validation
+- exception handling
+- frontend pages/components/dialogs/services/models/guards/interceptors
+- import logic for JSON files and static assets
+- sample mail configuration strategy
+- seed admin instructions
+- clear setup instructions
+
+--------------------------------------------------
+INPUT DATASETS
+--------------------------------------------------
+
+The application must be built around these input JSON datasets:
+- favourites.json
+- habitats.json
+- housing-kits.json
+- items.json
+- pokemon.json
+- specialties.json
+
+Also assume asset folders exist and contain the PNG files referenced by imagePath and spritePath:
+- habitats
+- housing-kits
+- items
+- pokemon
+- specialties
+
+Use the dataset structure as source of truth.
+
+Important observed data rules from the provided data:
+- pokemon entries include fields such as:
+  - id (UUID-like)
+  - number (string/integer-like Pokédex number; duplicates are possible)
+  - name
+  - specialties
+  - idealHabitat
+  - litterDrop
+  - favourites
+  - spritePath
+  - regions
+  - types
+  - timeOfDay
+  - rarity
+  - isEvent
+- Example: Pokémon have idealHabitat values like Bright, Warm, Humid, Dark, Dry, Cool; these should be derived from pokemon.json and represented as a string enum in code and DB, not hardcoded arbitrarily.[file:5]
+- Pokémon typically have exactly 6 favourites, with one flavour-based favourite that has no linked static item support in gameplay logic; implement this rule carefully.[file:5]
+- Professor Tangrowth exists in the dataset and must be fully excluded from the app’s user-facing and assignment logic.[file:5]
+- More than one Pokémon can share the same `number` value; therefore habitat-to-pokemon linkage via sequential number must support one-to-many mapping from habitat pokemonIds to all pokemon rows with that number.[file:3][file:5]
+- habitat entries include:
+  - id
+  - name
+  - slug
+  - isEvent
+  - pokemonIds
+  - imagePath
+- item entries include:
+  - name
+  - description
+  - category
+  - obtainMethod
+  - obtainDetails
+  - usedInHabitats
+  - craftingRecipeId
+  - tag
+  - colour
+  - imagePath
+- item tags include values such as Decoration, Relaxation, Toy, Food, Road, etc.; when houses show linked items, visually split them into “type decoration”, “relaxation”, “toy”, or “no type” according to the applicable tag/category mapping.[file:6]
+- specialties have name, description, imagePath and can be displayed in Pokémon details.[file:4]
+- housing kits should be imported and used to derive house capacities and dimensions where relevant.[file:1]
+
+Asset naming rule:
+- Pokémon asset file names follow `<number>-<name>.png`
+- `number` uses stripped numeric value from the Pokémon number
+- `name` removes spaces
+- account for edge cases like forms and hyphenated names robustly
+- however, if spritePath/imagePath exists in data, prefer the data-provided path as source of truth and normalize only where needed.[file:5]
+
+--------------------------------------------------
+CORE DOMAIN MODEL
+--------------------------------------------------
+
+Design a robust relational model for at least these tables/entities:
+
+Reference data:
+- pokemon
+- favourites
+- habitats
+- housing_kits
+- items
+- specialties
+
+User data:
+- users
+- roles
+- houses
+- user_registered_pokemon
+- house_pokemon_assignments
+- house_item_assignments
+- account_activation_tokens
+- password_reset_tokens
+- optional: email_change_verification_tokens
+- optional: totp_secrets / 2fa settings if implemented
+
+Required business concepts:
+- Houses belong to exactly one user.
+- Houses belong to exactly one region.
+- Region cannot be changed after creation.
+- House name must be unique within a region for that user; if you choose stronger uniqueness across all users in region, document it, but default should match the product requirement.
+- Users have a set/list of registered Pokémon based on pokemon IDs.
+- A registered Pokémon can be assigned to at most one house at a time.
+- Deleting a house makes its assigned Pokémon homeless.
+- Changing a house region is not allowed after creation; if editing flow mentions region changes, implement as prohibited after create and explain this resolves contradictory wording safely.
+- Houses may be of type:
+  - HABITAT
+  - CUSTOM
+  - HOUSING_KIT
+- Houses may have:
+  - name
+  - description
+  - region
+  - idealHabitat (enum from pokemon data)
+  - dimensions (editable only for CUSTOM houses)
+  - housing kit reference if relevant
+  - capacity rules
+- House capacity:
+  - HABITAT = 1
+  - CUSTOM = 4
+  - HOUSING_KIT = based on housing kit size/capacity
+- Items can be linked to many houses, and houses can have many items.
+- Houses derive “present favourites” from assigned items.
+- Suggested Pokémon for a house are based on active favourites and idealHabitat compatibility.
+- If no items are present, suggestion fallback uses idealHabitat + favourites of Pokémon already in the house.
+- If house is full, no suggestions should be shown.
+- If a Pokémon assigned to a house has none of its favourites active in that house, show a warning state.
+
+Important contradiction handling:
+One requirement says “a pokemon can only be assigned to 1 house” while another says “pokémon can be added to (linked to) houses (one or multiple at the same time)”.
+Implement the stricter and more consistent rule:
+- a Pokémon may only be assigned to one house at a time
+- document this decision clearly in README/architecture docs as a resolved business-rule conflict
+
+--------------------------------------------------
+REGIONS
+--------------------------------------------------
+
+Implement region support based on the available region values in pokemon.json.[file:5]
+Use an enum or managed reference table.
+A house must always belong to exactly one region.
+
+--------------------------------------------------
+AUTHENTICATION & USER MANAGEMENT
+--------------------------------------------------
+
+Normal user features:
+- Register account
+- Login with email + password
+- Logout
+- Change password
+- Change username
+- Change email
+- Change profile details
+- Username must be unique
+- Email must be unique
+- Account activation email is required before account can be used
+- Changing email should require re-verification of the new email
+- Passwords must be hashed securely
+- JWT auth with refresh strategy if appropriate
+- Optional TOTP 2FA can be included if fully implemented and documented; do not include half-finished 2FA
+
+Admin:
+- First admin will be manually promoted in the database
+- Admin role can:
+  - reload data from JSON files (all or specific dataset)
+  - view/edit/add/delete users
+  - add/remove admin role
+  - view/edit/add/delete pokemon
+  - view/edit/add/delete habitats
+  - view/edit/add/delete items
+  - view/edit/add/delete favourites
+  - view/edit/add/delete housing kits
+  - generate new JSON export files for those 5 editable reference datasets
+
+Normal users cannot directly edit core reference data.
+
+--------------------------------------------------
+FRONTEND PAGES
+--------------------------------------------------
+
+Create the following pages/routes:
+
+Public:
+- home/login page (default when not logged in)
+- registration page
+- account activation flow
+- forgot/reset password flow if implemented
+
+Authenticated user:
+- dashboard
+- pokedex
+- houses
+- items
+- habitats
+- profile
+
+Admin:
+- admin dashboard
+- admin data import/export page
+- admin users page
+- admin pokemon page
+- admin habitats page
+- admin items page
+- admin favourites page
+- admin housing-kits page
+
+UI requirements:
+- top menu bar
+- collapsed hamburger menu on mobile
+- responsive layout
+- filters on pages like houses and pokedex should be fixed on the right side on larger screens and independently scrollable
+- on mobile, filters should become a drawer/sheet
+- use cards for Pokédex entries, not tables
+- Pokémon details open in modal/dialog
+- house details/editing should use modal/dialog or detail pane
+- use sprites/images for Pokémon, habitats, items, housing kits, and specialties where applicable
+- registered Pokémon should be visually distinct from non-registered ones
+- all important user actions should have success/error feedback
+- use accessible colour contrast, focus states, keyboard navigation, aria labels, semantic structure, and reduced-motion-aware interactions
+
+--------------------------------------------------
+FUNCTIONAL REQUIREMENTS
+--------------------------------------------------
+
+Implement all of the following for normal users:
+
+1. Dashboard
+- show total registered Pokémon count out of total available Pokémon
+- show count of registered Pokémon currently assigned to houses
+- show list of registered Pokémon that are not housed (“homeless”)
+
+2. Pokédex
+- card grid of all available Pokémon except Professor Tangrowth
+- modal/details dialog for each Pokémon
+- toggle registered boolean for current user
+- filtering and sorting by as many relevant properties as practical, including:
+  - type
+  - assigned house
+  - specialties
+  - litterDrop
+  - favourites
+  - idealHabitat
+  - rarity
+  - isEvent
+  - assigned region (via current house)
+  - house type
+  - housed / homeless / unregistered
+- allow assigning/removing house from Pokémon where relevant
+- clear visual distinction for registered vs non-registered
+
+3. Houses
+- list houses
+- filter by region
+- filter by available spots
+- filter by favourites present
+- create house
+- edit house
+- delete house
+- house types: habitat, custom, housing kit
+- region assigned on create, immutable afterwards
+- name + description editable
+- unique house name within region
+- width/depth/height editable only for custom houses
+- assign/remove/move Pokémon
+- assign/remove items
+- assign habitat type (`idealHabitat`) to house
+- display present favourites derived from house items
+- visually split linked items into:
+  - Decoration
+  - Relaxation
+  - Toy
+  - No type
+- show suggested Pokémon for house based on:
+  - same idealHabitat
+  - active favourites from items
+  - fallback to favourites of already assigned Pokémon when there are no items
+  - do not show suggestions if house is full
+- if assigned Pokémon has zero active favourites in that house, show warning icon/state
+
+4. Items
+- list items
+- filter by favourites
+- filter by tag
+- filter by category
+- support selecting favourites from existing favourite data, not free text
+- allow linking items to houses where appropriate
+
+5. Habitats
+- list unique habitats
+- show habitat image and name
+- optionally show extra detail on hover/focus
+- filter based on whether all Pokémon within that habitat have been registered by the current user
+- visually distinguish habitats where all linked Pokémon are registered
+- linkage must support habitats referencing a numeric pokemonIds sequence that may map to multiple pokemon rows sharing the same number
+
+6. Profile
+- edit personal data
+- change username
+- change email with verification
+- change password
+- manage account preferences if any
+- 2FA settings only if fully implemented
+
+--------------------------------------------------
+ADMIN FUNCTIONALITY
+--------------------------------------------------
+
+Implement admin pages and APIs for:
+
+1. Data reload/import
+- reload all datasets from JSON
+- reload one dataset at a time
+- make import idempotent and safe
+- handle updates, inserts, removals appropriately and document strategy
+- enforce that initial dataset load happens once and later changes are admin-only
+
+2. User management
+- list users
+- filter/search users
+- add/edit/delete users
+- activate/deactivate if useful
+- add/remove ADMIN role
+
+3. Reference data CRUD
+- pokemon
+- habitats
+- items
+- favourites
+- housing kits
+
+4. JSON export
+- generate downloadable JSON file based on current database state for each of:
+  - pokemon
+  - habitats
+  - items
+  - favourites
+  - housing kits
+
+--------------------------------------------------
+BUSINESS RULES
+--------------------------------------------------
+
+Enforce these rules in backend and surface them in frontend validation:
+
+- Professor Tangrowth must be excluded entirely from app use cases and assignment logic.[file:5]
+- idealHabitat options must be derived from pokemon.json values only and represented as enum/string enum.[file:5]
+- habitats link by sequential pokemon number, not by pokemon UUID, and duplicate numbers can map to multiple Pokémon rows.[file:3][file:5]
+- Pokémon must be registered by a user before assignment to a house.
+- Pokémon can only be assigned to one house at a time.
+- Houses always belong to exactly one region.
+- Region cannot be changed after house creation.
+- Deleting a house unassigns its Pokémon.
+- House capacity limits must be enforced.
+- Favourites active in a house must be derived, not manually typed.
+- One flavour favourite does not have static item linkage; implement suggestion logic accordingly and document how flavour favourites are excluded or handled.[file:5]
+- Users can only edit their own profile, houses, registered Pokémon, and assignments.
+- Users cannot edit reference datasets directly.
+- Admin-only mutations for reference datasets.
+
+--------------------------------------------------
+REST API
+--------------------------------------------------
+
+Design and implement a clean REST API with versioning, e.g. `/api/v1/...`.
+
+Include endpoints for:
+- auth
+- activation
+- profile
+- users (admin)
+- pokemon
+- pokedex user registration state
+- houses
+- house assignments
+- items
+- habitats
+- favourites
+- housing kits
+- admin imports
+- admin exports
+
+Requirements:
+- proper request/response DTOs
+- validation errors in a consistent structure
+- pagination where sensible
+- filtering/sorting query parameters
+- clear HTTP semantics
+- OpenAPI/Swagger support preferred
+
+Also generate API documentation in the repository.
+
+--------------------------------------------------
+SECURITY REQUIREMENTS
+--------------------------------------------------
+
+Implement security seriously:
+- password hashing with BCrypt/Argon2
+- JWT authentication
+- refresh token strategy if used
+- email activation tokens
+- secure password reset if implemented
+- authorization by role and ownership
+- prevent privilege escalation
+- validate uploaded/imported data
+- CORS configured appropriately
+- no secrets committed
+- `.env.example` and config docs included
+- CSRF strategy documented depending on JWT transport approach
+- rate limiting for auth endpoints if practical
+- audit logging for admin actions if practical
+
+--------------------------------------------------
+ACCESSIBILITY REQUIREMENTS
+--------------------------------------------------
+
+Follow WCAG-minded implementation:
+- semantic landmarks
+- keyboard accessible menus, dialogs, forms, and filters
+- visible focus indicators
+- colour contrast compliance
+- screen-reader-friendly labels
+- proper aria usage for dialogs, icons, tables/lists, filters
+- reduced-motion support
+- responsive reflow without content loss
+- avoid colour-only meaning; use icons/text too
+- test or document accessibility checks
+
+--------------------------------------------------
+ERROR HANDLING
+--------------------------------------------------
+
+Implement robust backend and frontend error handling:
+- global backend exception handling
+- structured API error responses
+- validation messages
+- not-found handling
+- business-rule violation handling
+- network error handling in Angular
+- loading, empty, error states on pages
+- user-friendly messages, but preserve technical detail in logs
+
+--------------------------------------------------
+DATA IMPORT / SEEDING
+--------------------------------------------------
+
+Generate a complete importer that:
+- reads the provided JSON files
+- imports reference data into PostgreSQL
+- normalizes paths as needed
+- excludes Professor Tangrowth during import or marks him excluded from all app-facing queries
+- derives idealHabitat enum values from imported Pokémon data
+- resolves habitat-to-pokemon links using pokemon number
+- supports re-import by admin without corrupting data
+- supports running on startup for initial seed or through admin API
+
+Document:
+- where JSON files should be placed
+- where asset folders should be placed
+- how the importer works
+- how updates are handled
+
+--------------------------------------------------
+REPOSITORY STRUCTURE
+--------------------------------------------------
+
+Use a clean monorepo structure similar to:
+
+pokopia-tracker/
+  README.md
+  docker-compose.yml
+  .env.example
+  docs/
+    architecture.md
+    api.md
+    security.md
+    accessibility.md
+    import-export.md
+    decisions.md
+  backend/
+    Dockerfile
+    pom.xml
+    src/...
+  frontend/
+    Dockerfile
+    package.json
+    angular.json
+    src/...
+  data/
+    favourites.json
+    habitats.json
+    housing-kits.json
+    items.json
+    pokemon.json
+    specialties.json
+  assets/
+    habitats/
+    housing-kits/
+    items/
+    pokemon/
+    specialties/
+
+You may improve this structure if justified, but keep it coherent and production-ready.
+
+--------------------------------------------------
+PORTS
+--------------------------------------------------
+
+Do NOT use default ports.
+Choose sensible non-default ports and document them clearly.
+Example:
+- frontend: 4300
+- backend: 8088
+- postgres: 5433
+You may choose alternatives, but avoid Angular default 4200 and common Spring Boot default 8080.
+
+--------------------------------------------------
+UI / DESIGN REQUIREMENTS
+--------------------------------------------------
+
+Create a polished responsive UI with:
+- Angular Material as foundation
+- custom theme inspired by Pokopia
+- soft, cozy, playful but modern look
+- strong readability and contrast
+- mobile-friendly layout
+- card-based Pokédex
+- fixed right-side filter panel on desktop
+- collapsible filters on mobile
+- top navigation with hamburger on small screens
+- loading skeletons or spinners where appropriate
+- icons and colour cues for warning states
+- visual distinction for:
+  - registered vs unregistered Pokémon
+  - housed vs homeless Pokémon
+  - houses with free slots
+  - houses with incompatible Pokémon favourites
+  - habitats fully completed by user
+
+--------------------------------------------------
+QUALITY REQUIREMENTS
+--------------------------------------------------
+
+Generate code that is:
+- complete
+- consistent
+- idiomatic
+- strongly typed
+- maintainable
+- well-structured
+- documented
+- buildable
+- runnable
+
+Avoid:
+- placeholder code
+- fake implementations
+- commented-out stubs
+- duplicated logic
+- magic strings where enums/constants should be used
+
+--------------------------------------------------
+DOCUMENTATION REQUIREMENTS
+--------------------------------------------------
+
+Generate:
+1. Root README with:
+- project overview
+- stack
+- features
+- setup
+- run instructions
+- Docker instructions
+- environment variables
+- import instructions
+- admin setup
+- screenshots section placeholders only if necessary, but do not rely on missing screenshots
+- testing instructions
+- known assumptions and business rule clarifications
+
+2. Architecture documentation:
+- system overview
+- backend architecture
+- frontend architecture
+- auth flow
+- import flow
+- domain model explanation
+- key design decisions
+- resolved ambiguities/contradictions
+
+3. API documentation:
+- endpoint list
+- auth requirements
+- request/response examples
+- filtering/sorting conventions
+
+4. Security documentation
+
+5. Accessibility documentation
+
+6. Import/export documentation
+
+--------------------------------------------------
+TESTING REQUIREMENTS
+--------------------------------------------------
+
+Backend tests:
+- service tests for house assignment logic
+- validation/business rule tests
+- import tests
+- auth tests
+- controller integration tests where valuable
+
+Frontend tests:
+- component tests for key pages/components
+- service tests
+- route guard tests
+- interaction tests for filters and dialogs where practical
+
+If feasible:
+- a few E2E tests covering login, register Pokémon, create house, assign Pokémon
+
+--------------------------------------------------
+IMPLEMENTATION NOTES / RESOLUTION RULES
+--------------------------------------------------
+
+When requirements conflict, prefer consistency and document your choice.
+
+Explicitly apply these decisions:
+- Pokémon assignment is one Pokémon to at most one house at a time.
+- Region is immutable after house creation.
+- Suggestions require same idealHabitat.
+- Active favourites are derived from linked items.
+- If no items exist in a house, suggestion fallback uses idealHabitat plus favourites of Pokémon already assigned there.
+- If house is full, no suggestions.
+- Flavour favourites are not activated through static items and should be excluded from item-based active-favourite derivation unless you implement a clear separate mechanism and document it.
+- Professor Tangrowth is excluded from all user-facing and assignable Pokémon flows.
+
+--------------------------------------------------
+FINAL OUTPUT EXPECTATION
+--------------------------------------------------
+
+Produce the repository as a complete codebase with all files and their contents.
+
+Do not give only an explanation. Output the actual files and implementation.
+
+If output length becomes too large, emit the repository in a clear multi-file format, file by file, with exact paths and complete contents for each file.
+
+Start with:
+1. repository tree
+2. root-level files
+3. backend files
+4. frontend files
+5. docs
+6. data/import config
+7. docker/devops files
+
+Be meticulous and complete.

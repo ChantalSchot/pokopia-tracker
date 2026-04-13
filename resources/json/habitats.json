@@ -1,0 +1,1958 @@
+[
+  {
+    "id": "b1a0d0a4-4bc3-4f4f-9e5b-fd4f8f63b1c1",
+    "name": "Tall Grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#001",
+      "#004",
+      "#006",
+      "#007",
+      "#013",
+      "#159"
+    ],
+    "imagePath": "assets/habitats/1-tall-grass.png"
+  },
+  {
+    "id": "e7f3a3c0-0d4c-4f1e-9a21-36a6c2fb49c2",
+    "name": "Tree-shaded  tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#021",
+      "#042",
+      "#043",
+      "#044",
+      "#050",
+      "#191"
+    ],
+    "imagePath": "assets/habitats/2-tree-shaded-tall-grass.png"
+  },
+  {
+    "id": "3c3a6b5a-0a2b-4d6c-9bb3-91e7f4b7a3d3",
+    "name": "Boulder-shaded Tall Grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#065",
+      "#066",
+      "#156"
+    ],
+    "imagePath": "assets/habitats/3-boulder-shaded-tall-grass.png"
+  },
+  {
+    "id": "c4e2b7f3-5d0f-4e89-8a2c-2f2e4a0bb1d4",
+    "name": "Hydrated tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#008",
+      "#009",
+      "#075",
+      "#077"
+    ],
+    "imagePath": "assets/habitats/4-hydrated-tall-grass.png"
+  },
+  {
+    "id": "f6d8c9e2-2b8e-4c19-ae0b-6c7a1e2f3a55",
+    "name": "Seaside Tall Grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#024",
+      "#025",
+      "#026"
+    ],
+    "imagePath": "assets/habitats/5-seaside-tall-grass.png"
+  },
+  {
+    "id": "a7c1e2f3-9b0d-4f6e-8c1a-7d8e9f0a1b66",
+    "name": "Elevated tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#010",
+      "#011",
+      "#048",
+      "#049"
+    ],
+    "imagePath": "assets/habitats/6-elevated-tall-grass.png"
+  },
+  {
+    "id": "d8e9f0a1-2c3b-4d5e-9f0a-8b9c0d1e2f77",
+    "name": "Illuminated tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#019",
+      "#020"
+    ],
+    "imagePath": "assets/habitats/7-illuminated-tall-grass.png"
+  },
+  {
+    "id": "e9f0a1b2-3d4c-5e6f-8a9b-0c1d2e3f4a88",
+    "name": "Pretty flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#057",
+      "#162",
+      "#280"
+    ],
+    "imagePath": "assets/habitats/8-pretty-flower-bed.png"
+  },
+  {
+    "id": "f0a1b2c3-4e5d-6f7a-9b0c-1d2e3f4a5b99",
+    "name": "Tree-shaded flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#056",
+      "#074",
+      "#140"
+    ],
+    "imagePath": "assets/habitats/9-tree-shaded-flower-bed.png"
+  },
+  {
+    "id": "0a1b2c3d-5f6e-7a8b-9c0d-2e3f4a5b6c10",
+    "name": "Hydrated flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#051",
+      "#052"
+    ],
+    "imagePath": "assets/habitats/10-hydrated-flower-bed.png"
+  },
+  {
+    "id": "1b2c3d4e-6f7a-8b9c-0d1e-3f4a5b6c7d21",
+    "name": "Field of Flowers",
+    "isEvent": false,
+    "pokemonIds": [
+      "#002",
+      "#003",
+      "#058"
+    ],
+    "imagePath": "assets/habitats/11-field-of-flowers.png"
+  },
+  {
+    "id": "2c3d4e5f-7a8b-9c0d-1e2f-4a5b6c7d8e32",
+    "name": "Elevated flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#017",
+      "#018"
+    ],
+    "imagePath": "assets/habitats/12-elevated-flower-bed.png"
+  },
+  {
+    "id": "3d4e5f60-8b9c-0d1e-2f3a-5b6c7d8e9f43",
+    "name": "Grave with flowers",
+    "isEvent": false,
+    "pokemonIds": [
+      "#032",
+      "#033"
+    ],
+    "imagePath": "assets/habitats/13-grave-with-flowers.png"
+  },
+  {
+    "id": "4e5f6071-9c0d-1e2f-3a4b-6c7d8e9f0a54",
+    "name": "Flower garden",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/14-flower-garden.png"
+  },
+  {
+    "id": "5f607182-0d1e-2f3a-4b5c-7d8e9f0a1b65",
+    "name": "Fresh Veggie Field",
+    "isEvent": false,
+    "pokemonIds": [
+      "#063",
+      "#064",
+      "#185"
+    ],
+    "imagePath": "assets/habitats/15-fresh-veggie-field.png"
+  },
+  {
+    "id": "60718293-1e2f-3a4b-5c6d-8e9f0a1b2c76",
+    "name": "Riding warm updrafts",
+    "isEvent": false,
+    "pokemonIds": [
+      "#061"
+    ],
+    "imagePath": "assets/habitats/16-riding-warm-updrafts.png"
+  },
+  {
+    "id": "718293a4-2f3a-4b5c-6d7e-9f0a1b2c3d87",
+    "name": "Campsite",
+    "isEvent": false,
+    "pokemonIds": [
+      "#005"
+    ],
+    "imagePath": "assets/habitats/17-campsite.png"
+  },
+  {
+    "id": "8293a4b5-3a4b-5c6d-7e8f-0a1b2c3d4e98",
+    "name": "Training waterfall",
+    "isEvent": false,
+    "pokemonIds": [
+      "#034"
+    ],
+    "imagePath": "assets/habitats/18-training-waterfall.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-6d7e-8f90-1b2c3d4e5fa9",
+    "name": "Tantalizing dining set",
+    "isEvent": false,
+    "pokemonIds": [
+      "#053"
+    ],
+    "imagePath": "assets/habitats/19-tantalizing-dining-set.png"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-7e8f-9012-2c3d4e5f60ba",
+    "name": "Picnic Set",
+    "isEvent": false,
+    "pokemonIds": [
+      "#078",
+      "#079"
+    ],
+    "imagePath": "assets/habitats/20-picnic-set.png"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-8f90-1234-3d4e5f6071cb",
+    "name": "Flowery table",
+    "isEvent": false,
+    "pokemonIds": [
+      "#022",
+      "#023"
+    ],
+    "imagePath": "assets/habitats/21-flowery-table.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-9012-3456-4e5f607182dc",
+    "name": "Bench with greenery",
+    "isEvent": false,
+    "pokemonIds": [
+      "#041"
+    ],
+    "imagePath": "assets/habitats/22-bench-with-greenery.png"
+  },
+  {
+    "id": "d7e8f90a-8f90-1234-5678-5f60718293ed",
+    "name": "Illuminated bench",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/23-illuminated-bench.png"
+  },
+  {
+    "id": "e8f90a1b-9091-2345-6789-60718293a4fe",
+    "name": "Exercise resting spot",
+    "isEvent": false,
+    "pokemonIds": [
+      "#036"
+    ],
+    "imagePath": "assets/habitats/24-exercise-resting-spot.png"
+  },
+  {
+    "id": "f90a1b2c-a1b2-3456-7890-718293a4b50f",
+    "name": "Urgent Care",
+    "isEvent": false,
+    "pokemonIds": [
+      "#035"
+    ],
+    "imagePath": "assets/habitats/25-urgent-care.png"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-4567-8901-8293a4b5c610",
+    "name": "Gym first aid",
+    "isEvent": false,
+    "pokemonIds": [
+      "#037"
+    ],
+    "imagePath": "assets/habitats/26-gym-first-aid.png"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-5678-9012-93a4b5c6d721",
+    "name": "Road Sign",
+    "isEvent": false,
+    "pokemonIds": [
+      "#059"
+    ],
+    "imagePath": "assets/habitats/27-road-sign.png"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-6789-0123-a4b5c6d7e832",
+    "name": "Large luggage carrier",
+    "isEvent": false,
+    "pokemonIds": [
+      "#268",
+      "#269"
+    ],
+    "imagePath": "assets/habitats/28-large-luggage-carrier.png"
+  },
+  {
+    "id": "3d4e5f60-e5f6-7890-1234-b5c6d7e8f943",
+    "name": "Lumberjack's workplace",
+    "isEvent": false,
+    "pokemonIds": [
+      "#071",
+      "#072",
+      "#073"
+    ],
+    "imagePath": "assets/habitats/29-lumberjack-s-workplace.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-8901-2345-c6d7e8f90a54",
+    "name": "Bed with a plush",
+    "isEvent": false,
+    "pokemonIds": [
+      "#107"
+    ],
+    "imagePath": "assets/habitats/30-bed-with-a-plush.jpg"
+  },
+  {
+    "id": "5f607182-0718-9012-3456-d7e8f90a1b65",
+    "name": "Gently lit bed",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/31-gently-lit-bed.png"
+  },
+  {
+    "id": "60718293-1829-0123-4567-e8f90a1b2c76",
+    "name": "Grave offering",
+    "isEvent": false,
+    "pokemonIds": [
+      "#068",
+      "#069"
+    ],
+    "imagePath": "assets/habitats/32-grave-offering.png"
+  },
+  {
+    "id": "718293a4-293a-1234-5678-f90a1b2c3d87",
+    "name": "Creepy grave offering",
+    "isEvent": false,
+    "pokemonIds": [
+      "#070"
+    ],
+    "imagePath": "assets/habitats/33-creepy-grave-offering.png"
+  },
+  {
+    "id": "8293a4b5-3a4b-2345-6789-0a1b2c3d4e98",
+    "name": "Chansey Resting area",
+    "isEvent": false,
+    "pokemonIds": [
+      "#015",
+      "#016"
+    ],
+    "imagePath": "assets/habitats/34-chansey-resting-area.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-3456-7890-1b2c3d4e5fa9",
+    "name": "Irresistible scent and glow",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/35-irresistible-scent-and-glow.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-4567-8901-2c3d4e5f60ba",
+    "name": "Floating in the shade",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/36-floating-in-the-shade.png"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-5678-9012-3d4e5f6071cb",
+    "name": "Smooth tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#030"
+    ],
+    "imagePath": "assets/habitats/37-smooth-tall-grass.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-6789-0123-4e5f607182dc",
+    "name": "Factory Storage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#027"
+    ],
+    "imagePath": "assets/habitats/38-factory-storage.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-7890-1234-5f60718293ed",
+    "name": "Luxury chirp-chirp meal",
+    "isEvent": false,
+    "pokemonIds": [
+      "#012"
+    ],
+    "imagePath": "assets/habitats/39-luxury-chirp-chirp-meal.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-8901-2345-60718293a4fe",
+    "name": "Berry-feast Campsite",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/40-berry-feast-campsite.png"
+  },
+  {
+    "id": "f90a1b2c-a1b2-9012-3456-718293a4b50f",
+    "name": "Rain Dance site",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/41-rain-dance-site.png"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-0123-4567-8293a4b5c610",
+    "name": "Sunny Day site",
+    "isEvent": false,
+    "pokemonIds": [
+      "#055"
+    ],
+    "imagePath": "assets/habitats/42-sunny-day-site.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-1234-5678-93a4b5c6d721",
+    "name": "Professor's treasure trove",
+    "isEvent": false,
+    "pokemonIds": [
+      "#041"
+    ],
+    "imagePath": "assets/habitats/43-professor-s-treasure-trove.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-2345-6789-a4b5c6d7e832",
+    "name": "Crazy log handicrafts",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/44-crazy-log-handicrafts.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-3456-7890-b5c6d7e8f943",
+    "name": "Very-berry space",
+    "isEvent": false,
+    "pokemonIds": [
+      "#076"
+    ],
+    "imagePath": "assets/habitats/45-very-berry-space.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-4567-8901-c6d7e8f90a54",
+    "name": "Garden Terrace",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/46-garden-terrace.png"
+  },
+  {
+    "id": "5f607182-0718-5678-9012-d7e8f90a1b65",
+    "name": "Tree-shaded snoozing Snorlax",
+    "isEvent": false,
+    "pokemonIds": [
+      "#109"
+    ],
+    "imagePath": "assets/habitats/47-tree-shaded-snoozing-snorlax.jpg"
+  },
+  {
+    "id": "60718293-1829-6789-0123-e8f90a1b2c76",
+    "name": "Good old-fashioned antiques",
+    "isEvent": false,
+    "pokemonIds": [
+      "#039"
+    ],
+    "imagePath": "assets/habitats/48-good-old-fashioned-antiques.png"
+  },
+  {
+    "id": "718293a4-293a-7890-1234-f90a1b2c3d87",
+    "name": "Nothin' but Poke Balls",
+    "isEvent": false,
+    "pokemonIds": [
+      "#040"
+    ],
+    "imagePath": "assets/habitats/49-nothin-but-poke-balls.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-8901-2345-0a1b2c3d4e98",
+    "name": "Yellow tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#109",
+      "#110",
+      "#138"
+    ],
+    "imagePath": "assets/habitats/50-yellow-tall-grass.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-9012-3456-1b2c3d4e5fa9",
+    "name": "Tree-shaded Yellow tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#081",
+      "#082",
+      "#125",
+      "#126"
+    ],
+    "imagePath": "assets/habitats/51-tree-shaded-yellow-tall-grass.png"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-0123-4567-2c3d4e5f60ba",
+    "name": "Elevated yellow tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#083",
+      "#123",
+      "#124"
+    ],
+    "imagePath": "assets/habitats/52-elevated-yellow-tall-grass.png"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-1234-5678-3d4e5f6071cb",
+    "name": "Hydrated yellow tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#114",
+      "#115",
+      "#128",
+      "#129"
+    ],
+    "imagePath": "assets/habitats/53-hydrated-yellow-tall-grass.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-2345-6789-4e5f607182dc",
+    "name": "Marshy tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#117",
+      "#118"
+    ],
+    "imagePath": "assets/habitats/54-marshy-tall-grass.png"
+  },
+  {
+    "id": "d7e8f90a-8f90-3456-7890-5f60718293ed",
+    "name": "Overgrowth vending machine",
+    "isEvent": false,
+    "pokemonIds": [
+      "#111"
+    ],
+    "imagePath": "assets/habitats/55-overgrowth-vending-machine.png"
+  },
+  {
+    "id": "e8f90a1b-9091-4567-8901-60718293a4fe",
+    "name": "Breezy flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#134",
+      "#135",
+      "#142"
+    ],
+    "imagePath": "assets/habitats/56-breezy-flower-bed.png"
+  },
+  {
+    "id": "f90a1b2c-a1b2-5678-9012-718293a4b50f",
+    "name": "Tropical vibes",
+    "isEvent": false,
+    "pokemonIds": [
+      "#014",
+      "#098",
+      "#099"
+    ],
+    "imagePath": "assets/habitats/57-tropical-vibes.png"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-6789-0123-8293a4b5c610",
+    "name": "Windy Flower Bed",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/58-windy-flower-bed.png"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-7890-1234-93a4b5c6d721",
+    "name": "Shaded beach",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/59-shaded-beach.png"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-8901-2345-a4b5c6d7e832",
+    "name": "Tropical seaside",
+    "isEvent": false,
+    "pokemonIds": [
+      "#106"
+    ],
+    "imagePath": "assets/habitats/60-tropical-seaside.png"
+  },
+  {
+    "id": "3d4e5f60-e5f6-9012-3456-b5c6d7e8f943",
+    "name": "Resting spot",
+    "isEvent": false,
+    "pokemonIds": [
+      "#084"
+    ],
+    "imagePath": "assets/habitats/61-resting-spot.png"
+  },
+  {
+    "id": "4e5f6071-f607-0123-4567-c6d7e8f90a54",
+    "name": "Perpetual mess",
+    "isEvent": false,
+    "pokemonIds": [
+      "#088"
+    ],
+    "imagePath": "assets/habitats/62-perpetual-mess.png"
+  },
+  {
+    "id": "5f607182-0718-1234-5678-d7e8f90a1b65",
+    "name": "Trash collection site",
+    "isEvent": false,
+    "pokemonIds": [
+      "#038",
+      "#132",
+      "#133"
+    ],
+    "imagePath": "assets/habitats/63-trash-collection-site.png"
+  },
+  {
+    "id": "60718293-1829-2345-6789-e8f90a1b2c76",
+    "name": "Trash can central",
+    "isEvent": false,
+    "pokemonIds": [
+      "#028",
+      "#029",
+      "#104"
+    ],
+    "imagePath": "assets/habitats/64-trash-can-central.png"
+  },
+  {
+    "id": "718293a4-293a-3456-7890-f90a1b2c3d87",
+    "name": "Trash disposal site",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/65-trash-disposal-site.png"
+  },
+  {
+    "id": "8293a4b5-3a4b-4567-8901-0a1b2c3d4e98",
+    "name": "Park bench",
+    "isEvent": false,
+    "pokemonIds": [
+      "#096",
+      "#097"
+    ],
+    "imagePath": "assets/habitats/66-park-bench.jpg"
+  },
+  {
+    "id": "93a4b5c6-4b5c-5678-9012-1b2c3d4e5fa9",
+    "name": "Tantalizing restaurant",
+    "isEvent": false,
+    "pokemonIds": [
+      "#143"
+    ],
+    "imagePath": "assets/habitats/67-tantalizing-restaurant.png"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-6789-0123-2c3d4e5f60ba",
+    "name": "Tableside delivery cart",
+    "isEvent": false,
+    "pokemonIds": [
+      "#130"
+    ],
+    "imagePath": "assets/habitats/68-tableside-delivery-cart.jpg"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-7890-1234-3d4e5f6071cb",
+    "name": "Chirp-chirp meal",
+    "isEvent": false,
+    "pokemonIds": [
+      "#120",
+      "#122"
+    ],
+    "imagePath": "assets/habitats/69-chirp-chirp-meal.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-8901-2345-4e5f607182dc",
+    "name": "CafÃ© space",
+    "isEvent": false,
+    "pokemonIds": [
+      "#144"
+    ],
+    "imagePath": "assets/habitats/70-cafa-space.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-9012-3456-5f60718293ed",
+    "name": "Beach Set",
+    "isEvent": false,
+    "pokemonIds": [
+      "#145"
+    ],
+    "imagePath": "assets/habitats/71-beach-set.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-0123-4567-60718293a4fe",
+    "name": "Light-up stage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#105"
+    ],
+    "imagePath": "assets/habitats/72-light-up-stage.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-1234-5678-718293a4b50f",
+    "name": "Surprise in store",
+    "isEvent": false,
+    "pokemonIds": [
+      "#094",
+      "#095"
+    ],
+    "imagePath": "assets/habitats/73-surprise-in-store.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-2345-6789-8293a4b5c610",
+    "name": "Night festival venue",
+    "isEvent": false,
+    "pokemonIds": [
+      "#112"
+    ],
+    "imagePath": "assets/habitats/74-night-festival-venue.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-3456-7890-93a4b5c6d721",
+    "name": "Changing area",
+    "isEvent": false,
+    "pokemonIds": [
+      "#136"
+    ],
+    "imagePath": "assets/habitats/75-changing-area.png"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-4567-8901-a4b5c6d7e832",
+    "name": "Private makeup stand",
+    "isEvent": false,
+    "pokemonIds": [
+      "#137"
+    ],
+    "imagePath": "assets/habitats/76-private-makeup-stand.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-5678-9012-b5c6d7e8f943",
+    "name": "Knitting station",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/77-knitting-station.png"
+  },
+  {
+    "id": "4e5f6071-f607-6789-0123-c6d7e8f90a54",
+    "name": "Hot-spring shower",
+    "isEvent": false,
+    "pokemonIds": [
+      "#086",
+      "#087"
+    ],
+    "imagePath": "assets/habitats/78-hot-spring-shower.jpg"
+  },
+  {
+    "id": "5f607182-0718-7890-1234-d7e8f90a1b65",
+    "name": "Resort meal prep",
+    "isEvent": false,
+    "pokemonIds": [
+      "#121"
+    ],
+    "imagePath": "assets/habitats/79-resort-meal-prep.png"
+  },
+  {
+    "id": "60718293-1829-8901-2345-e8f90a1b2c76",
+    "name": "All packed up",
+    "isEvent": false,
+    "pokemonIds": [
+      "#090"
+    ],
+    "imagePath": "assets/habitats/80-all-packed-up.png"
+  },
+  {
+    "id": "718293a4-293a-9012-3456-f90a1b2c3d87",
+    "name": "Full recovery",
+    "isEvent": false,
+    "pokemonIds": [
+      "#079",
+      "#101"
+    ],
+    "imagePath": "assets/habitats/81-full-recovery.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-0123-4567-0a1b2c3d4e98",
+    "name": "Alarm clock sleep zone",
+    "isEvent": false,
+    "pokemonIds": [
+      "#100"
+    ],
+    "imagePath": "assets/habitats/82-alarm-clock-sleep-zone.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-1234-5678-1b2c3d4e5fa9",
+    "name": "Vending machine break area",
+    "isEvent": false,
+    "pokemonIds": [
+      "#139"
+    ],
+    "imagePath": "assets/habitats/83-vending-machine-break-area.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-2345-6789-2c3d4e5f60ba",
+    "name": "Vending machine set",
+    "isEvent": false,
+    "pokemonIds": [
+      "#103"
+    ],
+    "imagePath": "assets/habitats/84-vending-machine-set.jpg"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-3456-7890-3d4e5f6071cb",
+    "name": "Mini Game Corner",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/85-mini-game-corner.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-4567-8901-4e5f607182dc",
+    "name": "Waterwheel Spot",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/86-waterwheel-spot.png"
+  },
+  {
+    "id": "d7e8f90a-8f90-5678-9012-5f60718293ed",
+    "name": "Furnace Spot",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/87-furnace-spot.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-6789-0123-60718293a4fe",
+    "name": "Dock",
+    "isEvent": false,
+    "pokemonIds": [
+      "#116"
+    ],
+    "imagePath": "assets/habitats/88-dock.png"
+  },
+  {
+    "id": "f90a1b2c-a1b2-7890-1234-718293a4b50f",
+    "name": "Spooky study",
+    "isEvent": false,
+    "pokemonIds": [
+      "#093"
+    ],
+    "imagePath": "assets/habitats/89-spooky-study.png"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-8901-2345-8293a4b5c610",
+    "name": "Playing pirate",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/90-playing-pirate.png"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-9012-3456-93a4b5c6d721",
+    "name": "Working the register",
+    "isEvent": false,
+    "pokemonIds": [
+      "#131",
+      "#175"
+    ],
+    "imagePath": "assets/habitats/91-working-the-register.png"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-0123-4567-a4b5c6d7e832",
+    "name": "Tiny Atelier",
+    "isEvent": false,
+    "pokemonIds": [
+      "#119"
+    ],
+    "imagePath": "assets/habitats/92-tiny-atelier.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-1234-5678-b5c6d7e8f943",
+    "name": "Gourmet's altar",
+    "isEvent": false,
+    "pokemonIds": [
+      "#108"
+    ],
+    "imagePath": "assets/habitats/93-gourmet-s-altar.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-2345-6789-c6d7e8f90a54",
+    "name": "Pikachu space",
+    "isEvent": false,
+    "pokemonIds": [
+      "#141"
+    ],
+    "imagePath": "assets/habitats/94-pikachu-space.jpg"
+  },
+  {
+    "id": "5f607182-0718-3456-7890-d7e8f90a1b65",
+    "name": "Cuteness overload",
+    "isEvent": false,
+    "pokemonIds": [
+      "#102"
+    ],
+    "imagePath": "assets/habitats/95-cuteness-overload.jpg"
+  },
+  {
+    "id": "60718293-1829-4567-8901-e8f90a1b2c76",
+    "name": "Welcoming resort",
+    "isEvent": false,
+    "pokemonIds": [
+      "#127"
+    ],
+    "imagePath": "assets/habitats/96-welcoming-resort.png"
+  },
+  {
+    "id": "718293a4-293a-5678-9012-f90a1b2c3d87",
+    "name": "Plain life",
+    "isEvent": false,
+    "pokemonIds": [
+      "#113"
+    ],
+    "imagePath": "assets/habitats/97-plain-life.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-6789-0123-0a1b2c3d4e98",
+    "name": "Red tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#177",
+      "#180",
+      "#188",
+      "#190"
+    ],
+    "imagePath": "assets/habitats/98-red-tall-grass.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-7890-1234-1b2c3d4e5fa9",
+    "name": "Tree-shaded red tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#154",
+      "#155",
+      "#165",
+      "#166"
+    ],
+    "imagePath": "assets/habitats/99-tree-shaded-red-tall-grass.png"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-8901-2345-2c3d4e5f60ba",
+    "name": "Pointy tree-shaded rocky tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#186",
+      "#187"
+    ],
+    "imagePath": "assets/habitats/100-pointy-tree-shaded-rocky-tall-grass.png"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-9012-3456-3d4e5f6071cb",
+    "name": "Hydrated red tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#172",
+      "#173"
+    ],
+    "imagePath": "assets/habitats/101-hydrated-red-tall-grass.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-0123-4567-4e5f607182dc",
+    "name": "Elevated red tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#167",
+      "#179"
+    ],
+    "imagePath": "assets/habitats/102-elevated-red-tall-grass.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-1234-5678-5f60718293ed",
+    "name": "Grassy training field",
+    "isEvent": false,
+    "pokemonIds": [
+      "#157",
+      "#158"
+    ],
+    "imagePath": "assets/habitats/103-grassy-training-field.png"
+  },
+  {
+    "id": "e8f90a1b-9091-2345-6789-60718293a4fe",
+    "name": "Graceful flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#148",
+      "#149",
+      "#150",
+      "#198",
+      "#199"
+    ],
+    "imagePath": "assets/habitats/104-graceful-flower-bed.png"
+  },
+  {
+    "id": "f90a1b2c-a1b2-3456-7890-718293a4b50f",
+    "name": "Tree-shaded graceful flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#183",
+      "#184"
+    ],
+    "imagePath": "assets/habitats/105-tree-shaded-graceful-flower-bed.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-4567-8901-8293a4b5c610",
+    "name": "Hydrated graceful flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#146",
+      "#147",
+      "#212"
+    ],
+    "imagePath": "assets/habitats/106-hydrated-graceful-flower-bed.png"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-5678-9012-93a4b5c6d721",
+    "name": "Flower garden stump stage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#151",
+      "#152"
+    ],
+    "imagePath": "assets/habitats/107-flower-garden-stump-stage.png"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-6789-0123-a4b5c6d7e832",
+    "name": "Toil in the soil",
+    "isEvent": false,
+    "pokemonIds": [
+      "#171"
+    ],
+    "imagePath": "assets/habitats/108-toil-in-the-soil.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-7890-1234-b5c6d7e8f943",
+    "name": "Uplifting duckweed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#174"
+    ],
+    "imagePath": "assets/habitats/109-uplifting-duckweed.png"
+  },
+  {
+    "id": "4e5f6071-f607-8901-2345-c6d7e8f90a54",
+    "name": "Mossy rest spot",
+    "isEvent": false,
+    "pokemonIds": [
+      "#169"
+    ],
+    "imagePath": "assets/habitats/110-mossy-rest-spot.png"
+  },
+  {
+    "id": "5f607182-0718-9012-3456-d7e8f90a1b65",
+    "name": "Mossy boulder",
+    "isEvent": false,
+    "pokemonIds": [
+      "#160",
+      "#161"
+    ],
+    "imagePath": "assets/habitats/111-mossy-boulder.png"
+  },
+  {
+    "id": "60718293-1829-0123-4567-e8f90a1b2c76",
+    "name": "Mossy hot spring",
+    "isEvent": false,
+    "pokemonIds": [
+      "#176"
+    ],
+    "imagePath": "assets/habitats/112-mossy-hot-spring.png"
+  },
+  {
+    "id": "718293a4-293a-1234-5678-f90a1b2c3d87",
+    "name": "Open-air bath",
+    "isEvent": false,
+    "pokemonIds": [
+      "#189"
+    ],
+    "imagePath": "assets/habitats/113-open-air-bath.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-2345-6789-0a1b2c3d4e98",
+    "name": "Harmonious hot spring",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/114-harmonious-hot-spring.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-3456-7890-1b2c3d4e5fa9",
+    "name": "Piping-hot lava",
+    "isEvent": false,
+    "pokemonIds": [
+      "#200"
+    ],
+    "imagePath": "assets/habitats/115-piping-hot-lava.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-4567-8901-2c3d4e5f60ba",
+    "name": "Digging and burning",
+    "isEvent": false,
+    "pokemonIds": [
+      "#163"
+    ],
+    "imagePath": "assets/habitats/116-digging-and-burning.png"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-5678-9012-3d4e5f6071cb",
+    "name": "Clink-clang iron construction",
+    "isEvent": false,
+    "pokemonIds": [
+      "#031"
+    ],
+    "imagePath": "assets/habitats/117-clink-clang-iron-construction.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-6789-0123-4e5f607182dc",
+    "name": "Creepy white rocks",
+    "isEvent": false,
+    "pokemonIds": [
+      "#203",
+      "#204"
+    ],
+    "imagePath": "assets/habitats/118-creepy-white-rocks.png"
+  },
+  {
+    "id": "d7e8f90a-8f90-7890-1234-5f60718293ed",
+    "name": "Container snacking",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/119-container-snacking.png"
+  },
+  {
+    "id": "e8f90a1b-9091-8901-2345-60718293a4fe",
+    "name": "Dinner table surprise",
+    "isEvent": false,
+    "pokemonIds": [
+      "#054"
+    ],
+    "imagePath": "assets/habitats/120-dinner-table-surprise.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-9012-3456-718293a4b50f",
+    "name": "Best bread bakery",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/121-best-bread-bakery.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-0123-4567-8293a4b5c610",
+    "name": "Mini kitchen",
+    "isEvent": false,
+    "pokemonIds": [
+      "#164"
+    ],
+    "imagePath": "assets/habitats/122-mini-kitchen.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-1234-5678-93a4b5c6d721",
+    "name": "House party",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/123-house-party.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-2345-6789-a4b5c6d7e832",
+    "name": "Lazy-photo album scrolling",
+    "isEvent": false,
+    "pokemonIds": [
+      "#196"
+    ],
+    "imagePath": "assets/habitats/124-lazy-photo-album-scrolling.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-3456-7890-b5c6d7e8f943",
+    "name": "Chirping recital",
+    "isEvent": false,
+    "pokemonIds": [
+      "#168"
+    ],
+    "imagePath": "assets/habitats/125-chirping-recital.png"
+  },
+  {
+    "id": "4e5f6071-f607-4567-8901-c6d7e8f90a54",
+    "name": "Recital stage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#153"
+    ],
+    "imagePath": "assets/habitats/126-recital-stage.png"
+  },
+  {
+    "id": "5f607182-0718-5678-9012-d7e8f90a1b65",
+    "name": "Box to the rhythm",
+    "isEvent": false,
+    "pokemonIds": [
+      "#181"
+    ],
+    "imagePath": "assets/habitats/127-box-to-the-rhythm.jpg"
+  },
+  {
+    "id": "60718293-1829-6789-0123-e8f90a1b2c76",
+    "name": "Music and magazines",
+    "isEvent": false,
+    "pokemonIds": [
+      "#178",
+      "#182"
+    ],
+    "imagePath": "assets/habitats/128-music-and-magazines.jpg"
+  },
+  {
+    "id": "718293a4-293a-7890-1234-f90a1b2c3d87",
+    "name": "Mini museum",
+    "isEvent": false,
+    "pokemonIds": [
+      "#089",
+      "#205"
+    ],
+    "imagePath": "assets/habitats/129-mini-museum.png"
+  },
+  {
+    "id": "8293a4b5-3a4b-8901-2345-0a1b2c3d4e98",
+    "name": "Refreshing locker room",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/130-refreshing-locker-room.jpg"
+  },
+  {
+    "id": "93a4b5c6-4b5c-9012-3456-1b2c3d4e5fa9",
+    "name": "Bronze landmark",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/131-bronze-landmark.png"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-0123-4567-2c3d4e5f60ba",
+    "name": "Railroad crossing",
+    "isEvent": false,
+    "pokemonIds": [
+      "#193",
+      "#194",
+      "#195"
+    ],
+    "imagePath": "assets/habitats/132-railroad-crossing.jpg"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-1234-5678-3d4e5f6071cb",
+    "name": "Chef's kitchen",
+    "isEvent": false,
+    "pokemonIds": [
+      "#192"
+    ],
+    "imagePath": "assets/habitats/133-chef-s-kitchen.jpg"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-2345-6789-4e5f607182dc",
+    "name": "Absolute luxury",
+    "isEvent": false,
+    "pokemonIds": [
+      "#206"
+    ],
+    "imagePath": "assets/habitats/134-absolute-luxury.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-3456-7890-5f60718293ed",
+    "name": "Heavy iron",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/135-heavy-iron.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-4567-8901-60718293a4fe",
+    "name": "Modern living",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/136-modern-living.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-5678-9012-718293a4b50f",
+    "name": "Pink tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#237",
+      "#238",
+      "#239",
+      "#240",
+      "#242"
+    ],
+    "imagePath": "assets/habitats/137-pink-tall-grass.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-6789-0123-8293a4b5c610",
+    "name": "Tree-shaded pink tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#170",
+      "#260",
+      "#261",
+      "#263"
+    ],
+    "imagePath": "assets/habitats/138-tree-shaded-pink-tall-grass.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-7890-1234-93a4b5c6d721",
+    "name": "Hydrated pink tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#251",
+      "#252",
+      "#253"
+    ],
+    "imagePath": "assets/habitats/139-hydrated-pink-tall-grass.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-8901-2345-a4b5c6d7e832",
+    "name": "Elevated pink tall grass",
+    "isEvent": false,
+    "pokemonIds": [
+      "#258",
+      "#259",
+      "#266",
+      "#267"
+    ],
+    "imagePath": "assets/habitats/140-elevated-pink-tall-grass.png"
+  },
+  {
+    "id": "3d4e5f60-e5f6-9012-3456-b5c6d7e8f943",
+    "name": "Concrete pipe secret base",
+    "isEvent": false,
+    "pokemonIds": [
+      "#224",
+      "#225"
+    ],
+    "imagePath": "assets/habitats/141-concrete-pipe-secret-base.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-0123-4567-c6d7e8f90a54",
+    "name": "Fluffy flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#207",
+      "#208",
+      "#227",
+      "#228",
+      "#257"
+    ],
+    "imagePath": "assets/habitats/142-fluffy-flower-bed.jpg"
+  },
+  {
+    "id": "5f607182-0718-1234-5678-d7e8f90a1b65",
+    "name": "Tree-shaded fluffy flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#229",
+      "#230",
+      "#249",
+      "#250"
+    ],
+    "imagePath": "assets/habitats/143-tree-shaded-fluffy-flower-bed.jpg"
+  },
+  {
+    "id": "60718293-1829-2345-6789-e8f90a1b2c76",
+    "name": "Hydrated fluffy flower bed",
+    "isEvent": false,
+    "pokemonIds": [
+      "#210",
+      "#221",
+      "#222"
+    ],
+    "imagePath": "assets/habitats/144-hydrated-fluffy-flower-bed.png"
+  },
+  {
+    "id": "718293a4-293a-3456-7890-f90a1b2c3d87",
+    "name": "Waterside dinghy",
+    "isEvent": false,
+    "pokemonIds": [
+      "#223"
+    ],
+    "imagePath": "assets/habitats/145-waterside-dinghy.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-4567-8901-0a1b2c3d4e98",
+    "name": "Illuminated waterfall",
+    "isEvent": false,
+    "pokemonIds": [
+      "#046"
+    ],
+    "imagePath": "assets/habitats/146-illuminated-waterfall.jpg"
+  },
+  {
+    "id": "93a4b5c6-4b5c-5678-9012-1b2c3d4e5fa9",
+    "name": "Birdsong garden",
+    "isEvent": false,
+    "pokemonIds": [
+      "#241"
+    ],
+    "imagePath": "assets/habitats/147-birdsong-garden.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-6789-0123-2c3d4e5f60ba",
+    "name": "Simple bathroom",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/148-simple-bathroom.jpg"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-7890-1234-3d4e5f6071cb",
+    "name": "Cycling rest stop",
+    "isEvent": false,
+    "pokemonIds": [
+      "#245"
+    ],
+    "imagePath": "assets/habitats/149-cycling-rest-stop.jpg"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-8901-2345-4e5f607182dc",
+    "name": "Fireplace nap spot",
+    "isEvent": false,
+    "pokemonIds": [
+      "#226"
+    ],
+    "imagePath": "assets/habitats/150-fireplace-nap-spot.png"
+  },
+  {
+    "id": "d7e8f90a-8f90-9012-3456-5f60718293ed",
+    "name": "Surging psychic power",
+    "isEvent": false,
+    "pokemonIds": [
+      "#213",
+      "#215"
+    ],
+    "imagePath": "assets/habitats/151-surging-psychic-power.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-0123-4567-60718293a4fe",
+    "name": "Fortune-teller's table",
+    "isEvent": false,
+    "pokemonIds": [
+      "#214"
+    ],
+    "imagePath": "assets/habitats/152-fortune-teller-s-table.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-1234-5678-718293a4b50f",
+    "name": "Trash site TV",
+    "isEvent": false,
+    "pokemonIds": [
+      "#243",
+      "#244"
+    ],
+    "imagePath": "assets/habitats/153-trash-site-tv.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-2345-6789-8293a4b5c610",
+    "name": "Oversized dumping ground",
+    "isEvent": false,
+    "pokemonIds": [
+      "#270"
+    ],
+    "imagePath": "assets/habitats/154-oversized-dumping-ground.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-3456-7890-93a4b5c6d721",
+    "name": "Interrogation desk",
+    "isEvent": false,
+    "pokemonIds": [
+      "#264"
+    ],
+    "imagePath": "assets/habitats/155-interrogation-desk.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-4567-8901-a4b5c6d7e832",
+    "name": "Sewer hole inspection",
+    "isEvent": false,
+    "pokemonIds": [
+      "#211"
+    ],
+    "imagePath": "assets/habitats/156-sewer-hole-inspection.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-5678-9012-b5c6d7e8f943",
+    "name": "Spotless Washing station",
+    "isEvent": false,
+    "pokemonIds": [
+      "#216",
+      "#217"
+    ],
+    "imagePath": "assets/habitats/157-spotless-washing-station.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-6789-0123-c6d7e8f90a54",
+    "name": "Home theater",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/158-home-theater.jpg"
+  },
+  {
+    "id": "5f607182-0718-7890-1234-d7e8f90a1b65",
+    "name": "Study Area",
+    "isEvent": false,
+    "pokemonIds": [
+      "#231",
+      "#232"
+    ],
+    "imagePath": "assets/habitats/159-study-area.jpg"
+  },
+  {
+    "id": "60718293-1829-8901-2345-e8f90a1b2c76",
+    "name": "Rhythmic Living room",
+    "isEvent": false,
+    "pokemonIds": [
+      "#255",
+      "#256"
+    ],
+    "imagePath": "assets/habitats/160-rhythmic-living-room.jpg"
+  },
+  {
+    "id": "718293a4-293a-9012-3456-f90a1b2c3d87",
+    "name": "Squeaky clean",
+    "isEvent": false,
+    "pokemonIds": [
+      "#209"
+    ],
+    "imagePath": "assets/habitats/161-squeaky-clean.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-0123-4567-0a1b2c3d4e98",
+    "name": "Moisturizing makeup stand",
+    "isEvent": false,
+    "pokemonIds": [
+      "#233"
+    ],
+    "imagePath": "assets/habitats/162-moisturizing-makeup-stand.jpg"
+  },
+  {
+    "id": "93a4b5c6-4b5c-1234-5678-1b2c3d4e5fa9",
+    "name": "Mini library",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/163-mini-library.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-2345-6789-2c3d4e5f60ba",
+    "name": "Game Corner battle zone",
+    "isEvent": false,
+    "pokemonIds": [
+      "#220"
+    ],
+    "imagePath": "assets/habitats/164-game-corner-battle-zone.png"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-3456-7890-3d4e5f6071cb",
+    "name": "Playland",
+    "isEvent": false,
+    "pokemonIds": [
+      "#248"
+    ],
+    "imagePath": "assets/habitats/165-playland.jpg"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-4567-8901-4e5f607182dc",
+    "name": "Work desk",
+    "isEvent": false,
+    "pokemonIds": [
+      "#219"
+    ],
+    "imagePath": "assets/habitats/166-work-desk.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-5678-9012-5f60718293ed",
+    "name": "Office storeroom",
+    "isEvent": false,
+    "pokemonIds": [
+      "#262"
+    ],
+    "imagePath": "assets/habitats/167-office-storeroom.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-6789-0123-60718293a4fe",
+    "name": "Experiment Space",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/168-experiment-space.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-7890-1234-718293a4b50f",
+    "name": "Professor's apprentice program",
+    "isEvent": false,
+    "pokemonIds": [
+      "#246"
+    ],
+    "imagePath": "assets/habitats/169-professor-s-apprentice-program.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-8901-2345-8293a4b5c610",
+    "name": "Researcher's desk",
+    "isEvent": false,
+    "pokemonIds": [
+      "#218"
+    ],
+    "imagePath": "assets/habitats/170-researcher-s-desk.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-9012-3456-93a4b5c6d721",
+    "name": "Public reading material",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/171-public-reading-material.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-0123-4567-a4b5c6d7e832",
+    "name": "Heart-pounding surprise box",
+    "isEvent": false,
+    "pokemonIds": [
+      "#265"
+    ],
+    "imagePath": "assets/habitats/172-heart-pounding-surprise-box.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-1234-5678-b5c6d7e8f943",
+    "name": "Prank button",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/173-prank-button.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-2345-6789-c6d7e8f90a54",
+    "name": "Picturesque photo cutout board",
+    "isEvent": false,
+    "pokemonIds": [
+      "#235",
+      "#236"
+    ],
+    "imagePath": "assets/habitats/174-picturesque-photo-cutout-board.jpg"
+  },
+  {
+    "id": "5f607182-0718-3456-7890-d7e8f90a1b65",
+    "name": "Tire Park",
+    "isEvent": false,
+    "pokemonIds": [
+      "#254"
+    ],
+    "imagePath": "assets/habitats/175-tire-park.jpg"
+  },
+  {
+    "id": "60718293-1829-4567-8901-e8f90a1b2c76",
+    "name": "Nature's market",
+    "isEvent": false,
+    "pokemonIds": [
+      "#080"
+    ],
+    "imagePath": "assets/habitats/176-nature-s-market.jpg"
+  },
+  {
+    "id": "718293a4-293a-5678-9012-f90a1b2c3d87",
+    "name": "Construction-site generator",
+    "isEvent": false,
+    "pokemonIds": [
+      "#067"
+    ],
+    "imagePath": "assets/habitats/177-construction-site-generator.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-6789-0123-0a1b2c3d4e98",
+    "name": "Dojo training",
+    "isEvent": false,
+    "pokemonIds": [
+      "#234"
+    ],
+    "imagePath": "assets/habitats/178-dojo-training.jpg"
+  },
+  {
+    "id": "93a4b5c6-4b5c-7890-1234-1b2c3d4e5fa9",
+    "name": "Evil organization HQ",
+    "isEvent": false,
+    "pokemonIds": [
+      "#085"
+    ],
+    "imagePath": "assets/habitats/179-evil-organization-hq.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-8901-2345-2c3d4e5f60ba",
+    "name": "Nine flames",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/180-nine-flames.jpg"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-9012-3456-3d4e5f6071cb",
+    "name": "Plush central",
+    "isEvent": false,
+    "pokemonIds": [
+      "#062"
+    ],
+    "imagePath": "assets/habitats/181-plush-central.png"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-0123-4567-4e5f607182dc",
+    "name": "Gamer's paradise",
+    "isEvent": false,
+    "pokemonIds": [
+      "#247"
+    ],
+    "imagePath": "assets/habitats/182-gamer-s-paradise.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-1234-5678-5f60718293ed",
+    "name": "Top pop",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/183-top-pop.png"
+  },
+  {
+    "id": "e8f90a1b-9091-2345-6789-60718293a4fe",
+    "name": "Fishing pond",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/184-fishing-pond.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-3456-7890-718293a4b50f",
+    "name": "Ocean fishing spot",
+    "isEvent": false,
+    "pokemonIds": [
+      "#045",
+      "#060"
+    ],
+    "imagePath": "assets/habitats/185-ocean-fishing-spot.png"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-4567-8901-8293a4b5c610",
+    "name": "Marsh fishing spot",
+    "isEvent": false,
+    "pokemonIds": [
+      "#091",
+      "#092"
+    ],
+    "imagePath": "assets/habitats/186-marsh-fishing-spot.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-5678-9012-93a4b5c6d721",
+    "name": "Hot-spring Fishing Spot",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/187-hot-spring-fishing-spot.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-6789-0123-a4b5c6d7e832",
+    "name": "Magma fishing spot",
+    "isEvent": false,
+    "pokemonIds": [],
+    "imagePath": "assets/habitats/188-magma-fishing-spot.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-7890-1234-b5c6d7e8f943",
+    "name": "Amped rock stage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#197"
+    ],
+    "imagePath": "assets/habitats/189-amped-rock-stage.png"
+  },
+  {
+    "id": "4e5f6071-f607-8901-2345-c6d7e8f90a54",
+    "name": "Low-key rock stage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#197"
+    ],
+    "imagePath": "assets/habitats/190-low-key-rock-stage.jpg"
+  },
+  {
+    "id": "5f607182-0718-9012-3456-d7e8f90a1b65",
+    "name": "Malicious knight's shrine",
+    "isEvent": false,
+    "pokemonIds": [
+      "#202"
+    ],
+    "imagePath": "assets/habitats/191-malicious-knight-s-shrine.jpg"
+  },
+  {
+    "id": "60718293-1829-0123-4567-e8f90a1b2c76",
+    "name": "Auspicious knight's shrine",
+    "isEvent": false,
+    "pokemonIds": [
+      "#201"
+    ],
+    "imagePath": "assets/habitats/192-auspicious-knight-s-shrine.jpg"
+  },
+  {
+    "id": "718293a4-293a-1234-5678-f90a1b2c3d87",
+    "name": "Wing Fossil Display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#271"
+    ],
+    "imagePath": "assets/habitats/193-wing-fossil-display.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-2345-6789-0a1b2c3d4e98",
+    "name": "Skull Fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#272"
+    ],
+    "imagePath": "assets/habitats/194-skull-fossil-display.jpg"
+  },
+  {
+    "id": "93a4b5c6-4b5c-3456-7890-1b2c3d4e5fa9",
+    "name": "Headbutt Fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#273"
+    ],
+    "imagePath": "assets/habitats/195-headbutt-fossil-display.jpg"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-4567-8901-2c3d4e5f60ba",
+    "name": "Armor Fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#274"
+    ],
+    "imagePath": "assets/habitats/196-armor-fossil-display.jpg"
+  },
+  {
+    "id": "b5c6d7e8-6d7e-5678-9012-3d4e5f6071cb",
+    "name": "Shield Fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#275"
+    ],
+    "imagePath": "assets/habitats/197-shield-fossil-display.jpg"
+  },
+  {
+    "id": "c6d7e8f9-7e8f-6789-0123-4e5f607182dc",
+    "name": "Jaw Fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#276"
+    ],
+    "imagePath": "assets/habitats/198-jaw-fossil-display.jpg"
+  },
+  {
+    "id": "d7e8f90a-8f90-7890-1234-5f60718293ed",
+    "name": "Despot fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#277"
+    ],
+    "imagePath": "assets/habitats/199-despot-fossil-display.jpg"
+  },
+  {
+    "id": "e8f90a1b-9091-8901-2345-60718293a4fe",
+    "name": "Sail Fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#278"
+    ],
+    "imagePath": "assets/habitats/200-sail-fossil-display.jpg"
+  },
+  {
+    "id": "f90a1b2c-a1b2-9012-3456-718293a4b50f",
+    "name": "Tundra fossil display",
+    "isEvent": false,
+    "pokemonIds": [
+      "#279"
+    ],
+    "imagePath": "assets/habitats/201-tundra-fossil-display.jpg"
+  },
+  {
+    "id": "0a1b2c3d-b2c3-0123-4567-8293a4b5c610",
+    "name": "Boundless blue beverage",
+    "isEvent": false,
+    "pokemonIds": [
+      "#281"
+    ],
+    "imagePath": "assets/habitats/202-boundless-blue-beverage.jpg"
+  },
+  {
+    "id": "1b2c3d4e-c3d4-1234-5678-93a4b5c6d721",
+    "name": "Electrifying potatoes",
+    "isEvent": false,
+    "pokemonIds": [
+      "#282"
+    ],
+    "imagePath": "assets/habitats/203-electrifying-potatoes.jpg"
+  },
+  {
+    "id": "2c3d4e5f-d4e5-2345-6789-a4b5c6d7e832",
+    "name": "Burning-hot spice",
+    "isEvent": false,
+    "pokemonIds": [
+      "#283"
+    ],
+    "imagePath": "assets/habitats/204-burning-hot-spice.jpg"
+  },
+  {
+    "id": "3d4e5f60-e5f6-3456-7890-b5c6d7e8f943",
+    "name": "Elegant daytime treats",
+    "isEvent": false,
+    "pokemonIds": [
+      "#284"
+    ],
+    "imagePath": "assets/habitats/205-elegant-daytime-treats.jpg"
+  },
+  {
+    "id": "4e5f6071-f607-4567-8901-c6d7e8f90a54",
+    "name": "Dark-chocolate cookies",
+    "isEvent": false,
+    "pokemonIds": [
+      "#285"
+    ],
+    "imagePath": "assets/habitats/206-dark-chocolate-cookies.jpg"
+  },
+  {
+    "id": "5f607182-0718-5678-9012-d7e8f90a1b65",
+    "name": "Leafy greens sandwich",
+    "isEvent": false,
+    "pokemonIds": [
+      "#286"
+    ],
+    "imagePath": "assets/habitats/207-leafy-greens-sandwich.jpg"
+  },
+  {
+    "id": "60718293-1829-6789-0123-e8f90a1b2c76",
+    "name": "Chilly shaved ice",
+    "isEvent": false,
+    "pokemonIds": [
+      "#287"
+    ],
+    "imagePath": "assets/habitats/208-chilly-shaved-ice.jpg"
+  },
+  {
+    "id": "718293a4-293a-7890-1234-f90a1b2c3d87",
+    "name": "Lovely ribbon cake",
+    "isEvent": false,
+    "pokemonIds": [
+      "#288"
+    ],
+    "imagePath": "assets/habitats/209-lovely-ribbon-cake.jpg"
+  },
+  {
+    "id": "8293a4b5-3a4b-8901-2345-0a1b2c3d4e98",
+    "name": "Yellow carpet",
+    "isEvent": true,
+    "pokemonIds": [
+      "#10001",
+      "#10002",
+      "#10003"
+    ],
+    "imagePath": "assets/habitats/10001-yellow-carpet.png"
+  },
+  {
+    "id": "93a4b5c6-4b5c-9012-3456-1b2c3d4e5fa9",
+    "name": "Field-trip friends",
+    "isEvent": true,
+    "pokemonIds": [
+      "#10002"
+    ],
+    "imagePath": "assets/habitats/10002-field-trip-friends.png"
+  },
+  {
+    "id": "a4b5c6d7-5c6d-0123-4567-2c3d4e5f60ba",
+    "name": "Dandelion lunchtime",
+    "isEvent": true,
+    "pokemonIds": [
+      "#10003"
+    ],
+    "imagePath": "assets/habitats/10003-dandelion-lunchtime.png"
+  }
+]

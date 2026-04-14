@@ -1,0 +1,56 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/pokopia}
+    username: ${DB_USERNAME:pokopia}
+    password: ${DB_PASSWORD:pokopia}
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  jackson:
+    default-property-inclusion: non_null
+
+jwt:
+  secret: ${JWT_SECRET:changeme-very-long-secret-key-at-least-256-bits-for-hs512}
+  access-token-expiration: 900
+  refresh-token-expiration: 604800
+  inactivity-timeout: 10800
+
+app:
+  assets-path: ${ASSETS_PATH:resources/assets}
+  frontend-url: ${FRONTEND_URL:http://localhost:4300}
+  import-data-path: ${IMPORT_DATA_PATH:resources/json}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    com.pokopia.tracker: INFO
+    org.springframework.security: WARN

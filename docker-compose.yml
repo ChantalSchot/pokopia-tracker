@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: pokopia
+      POSTGRES_USER: pokopia
+      POSTGRES_PASSWORD: pokopia
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pokopia"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    ports:
+      - "8088:8088"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/pokopia
+      DB_USERNAME: pokopia
+      DB_PASSWORD: pokopia
+      JWT_SECRET: ${JWT_SECRET:-change-me-very-long-secret-key-at-least-256-bits}
+      ASSETS_PATH: /app/resources/assets
+      FRONTEND_URL: http://localhost:4300
+    volumes:
+      - ./resources:/app/resources:ro
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4300:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

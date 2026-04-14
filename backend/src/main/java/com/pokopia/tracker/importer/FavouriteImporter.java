@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class FavouriteImporter {
         "sweet flavors", "sour flavors", "spicy flavors", "bitter flavors", "dry flavors"
     );
 
+    @Transactional
     public void importData() {
         try {
             File file = new File(importDataPath, "favourites.json");

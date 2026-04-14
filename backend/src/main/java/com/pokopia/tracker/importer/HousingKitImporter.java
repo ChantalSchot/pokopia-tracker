@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class HousingKitImporter {
     @Value("${app.import-data-path}")
     private String importDataPath;
 
+    @Transactional
     public void importData() {
         try {
             File file = new File(importDataPath, "housing-kits.json");

@@ -10,6 +10,7 @@ import com.pokopia.tracker.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -29,6 +30,7 @@ public class ItemImporter {
     @Value("${app.import-data-path}")
     private String importDataPath;
 
+    @Transactional
     public void importData() {
         try {
             File file = new File(importDataPath, "items.json");
@@ -61,6 +63,7 @@ public class ItemImporter {
         }
     }
 
+    @Transactional
     public void linkItemsToFavourites() {
         try {
             File file = new File(importDataPath, "favourites.json");

@@ -1,155 +1,186 @@
 [
   {
+    "id": "ce7e2130-208f-4521-8a0d-38bbce1bc6aa",
     "name": "Appraise",
     "description": "You can show lost relics you've found to Professor Tangrowth, who will appraise them for you",
     "imagePath": "assets/specialties/appraise.png"
   },
   {
+    "id": "3303ca33-cbf0-4099-b64c-1b167f4c0279",
     "name": "Build",
     "description": "Pokémon with the Build specialty will lead your building projects",
     "imagePath": "assets/specialties/build.png"
   },
   {
+    "id": "6a521f23-2d8e-4327-9a88-70f1d90143ea",
     "name": "Bulldoze",
     "description": "Pokémon with the Bulldoze specialty can lead your demolition, rebuilding or relocation projects",
     "imagePath": "assets/specialties/bulldoze.png"
   },
   {
+    "id": "e72aa9ff-a2d0-47a0-9e4d-fdc24446bd61",
     "name": "Burn",
     "description": "Pokémon with the Burn specialty can set fire to Flammable objects. They can also turn Squish clay into Brick",
     "imagePath": "assets/specialties/burn.png"
   },
   {
+    "id": "b96df08f-da9b-4afc-bdf9-1b346764d1e3",
     "name": "Chop",
     "description": "Pokémon with the Chop specialty can process small logs into lumber",
     "imagePath": "assets/specialties/chop.png"
   },
   {
+    "id": "a9e21c91-d68a-4ff5-ae86-1d92f9eb621a",
     "name": "Collect",
     "description": "Pokémon with the Collect specialty will trade you rare things for certain items",
     "imagePath": "assets/specialties/collect.png"
   },
   {
+    "id": "691d0c21-eb97-4f81-acf5-cfa701cdbc64",
     "name": "Crush",
     "description": "Pokémon with the Crush specialty can mash materials into different things",
     "imagePath": "assets/specialties/crush.png"
   },
   {
+    "id": "206d03b8-03e4-4279-a332-10cf7912943d",
     "name": "DJ",
     "description": "DJ Rotom can use the DJ specialty to play music CDs for you",
     "imagePath": "assets/specialties/dj.png"
   },
   {
+    "id": "0eb598a6-358b-4999-911e-b7f9e333a356",
     "name": "Dream Island",
     "description": "Pokémon with the Dream Island specialty can transport you to a Dream Island",
     "imagePath": "assets/specialties/dreamisland.png"
   },
   {
+    "id": "deca864e-7ad4-4dfb-9719-e5ef626ca770",
     "name": "Eat",
     "description": "Mosslax has the Eat specialty. Something good may happen if you offer them food",
     "imagePath": "assets/specialties/eat.png"
   },
   {
+    "id": "e683eb67-ca1a-41ea-b279-de99d9efcd0c",
     "name": "Engineer",
     "description": "Tinkmaster has the Engineer specialty and can lead huge building projects",
     "imagePath": "assets/specialties/engineer.png"
   },
   {
+    "id": "1b0e0108-54b6-4216-9b5b-e37fa8720f52",
     "name": "Explode",
     "description": "Pokémon with the Explode specialty can be fired out of a cannon, destroying everything around them on impact",
     "imagePath": "assets/specialties/explode.png"
   },
   {
+    "id": "9a16176c-ebdd-4913-a1f3-7212bcc9a561",
     "name": "Fly",
     "description": "Pokémon with the Fly spceialty can fly you to a Pokémon you're searching fo",
     "imagePath": "assets/specialties/fly.png"
   },
   {
+    "id": "9188b08f-85a6-491d-a6b5-98bdfddc6ac4",
     "name": "Gather",
     "description": "Pokémon with the Gather specialty will pick up items on the ground and put them inside a community box",
     "imagePath": "assets/specialties/gather.png"
   },
   {
+    "id": "870ce014-978a-4fba-bf60-205d690626db",
     "name": "Gather Honey",
     "description": "Pokémon with the Gather Honey specialty will give you special furniture if you bring them honey",
     "imagePath": "assets/specialties/gatherhoney.png"
   },
   {
+    "id": "2907bd72-b86c-49fa-9722-5d7c2ee5969d",
     "name": "Generate",
     "description": "Pokémon with the Generate specialty can power machines with electricty",
     "imagePath": "assets/specialties/generate.png"
   },
   {
+    "id": "af89741f-8e5f-4fa6-9f91-f2bd64cba1e4",
     "name": "Grow",
     "description": "Pokémon with the Grow specialty can make plants grow faster",
     "imagePath": "assets/specialties/grow.png"
   },
   {
+    "id": "4c1499be-e9f1-4896-9c36-9f3691acd1e2",
     "name": "Hype",
     "description": "Pokémon with the Hype specialty will start dancing when they hear music, improving the mood",
     "imagePath": "assets/specialties/hype.png"
   },
   {
+    "id": "0dea0a3c-e9d8-49bf-8248-eb4777a894a8",
     "name": "Illuminate",
     "description": "Peakychu can use the Illuminate specialty to light up the whole town for you",
     "imagePath": "assets/specialties/illuminate.png"
   },
   {
+    "id": "67951199-718c-4b64-b141-b586fa74a5e9",
     "name": "Litter",
     "description": "Pokémon with the Litter specialty will drop useful materials near their homes",
     "imagePath": "assets/specialties/litter.png"
   },
   {
+    "id": "2076d093-2be8-4f17-8851-fc9a195ea6d4",
     "name": "Paint",
     "description": "Smearguru has the Paint specialty and can recolor certain items, such as furniture",
     "imagePath": "assets/specialties/paint.png"
   },
   {
+    "id": "41e0e888-1ebe-49f9-81ee-cea027a2d7d4",
     "name": "Party",
     "description": "Chef Dente can use the Party specialty to help you prepare food for parties",
     "imagePath": "assets/specialties/party.png"
   },
   {
+    "id": "9caf0785-9e70-4843-836f-84d1ee59d26a",
     "name": "Rarify",
     "description": "Pokémon with the Rarify specialty can turn Star Pieces into rare Pok&eacute;metal",
     "imagePath": "assets/specialties/rarify.png"
   },
   {
+    "id": "219da30b-631d-495f-ba36-423c5a603b27",
     "name": "Recycle",
     "description": "Pokémon with the Recycle specialty can process nonburnable garbage into iron ore and wastepaper into paper",
     "imagePath": "assets/specialties/recycle.png"
   },
   {
+    "id": "893d9710-1fd7-47c0-992c-99a69b7a450e",
     "name": "Search",
     "description": "Pokémon with the Search specialty can help you find buried items",
     "imagePath": "assets/specialties/search.png"
   },
   {
+    "id": "cb6b63fc-2bc8-4327-babd-4a70ca40f1ad",
     "name": "Storage",
     "description": "Pokémon with the Storage specialty can hold on to your items for you",
     "imagePath": "assets/specialties/storage.png"
   },
   {
+    "id": "dc71365e-26a3-4cb1-9997-5a5c250d81f5",
     "name": "Teleport",
     "description": "Pokémon with the Teleport specialty can instantly take you to a Pokémon you're searching for",
     "imagePath": "assets/specialties/teleport.png"
   },
   {
+    "id": "e15546b3-6240-41e0-9425-136577cad0ff",
     "name": "Trade",
     "description": "Pokémon with the Trade speicalty can exchange items with you at a cash register",
     "imagePath": "assets/specialties/trade.png"
   },
   {
+    "id": "9d45a60c-c0e1-4cd7-9ac8-fa2fc77cebbc",
     "name": "Transform",
     "description": "Ditto can improve its moves by using Transform",
     "imagePath": "assets/specialties/transform.png"
   },
   {
+    "id": "94073c14-6652-4e79-b8f2-590ab5d5240c",
     "name": "Water",
     "description": "Pokémon with the Water specialty can use a full water basin to spray water on nearby fields and plants",
     "imagePath": "assets/specialties/water.png"
   },
   {
+    "id": "e6bef505-bb36-4256-ba92-d8690c16ce3d",
     "name": "Yawn",
     "description": "Pokémon with the Yawn specialty can tell you how humid it is",
     "imagePath": "assets/specialties/yawn.png"

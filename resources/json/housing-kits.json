@@ -1,5 +1,6 @@
 [
   {
+    "id": "249f96f4-fae9-41da-a613-82e0ca26ba57",
     "name": "Leaf den",
     "floors": 1,
     "size": 1,
@@ -9,6 +10,7 @@
     "imagePath": "assets/housing-kits/leafden.png"
   },
   {
+    "id": "c46acb3b-cd6e-485c-b45d-f8aacddb7275",
     "name": "Leaf hut",
     "floors": 1,
     "size": 1,
@@ -18,6 +20,7 @@
     "imagePath": "assets/housing-kits/leafhut.png"
   },
   {
+    "id": "b9707310-c126-4242-a4ad-9134fa410ea8",
     "name": "Leaf cottage",
     "floors": 1,
     "size": 2,
@@ -27,6 +30,7 @@
     "imagePath": "assets/housing-kits/leafcottage.png"
   },
   {
+    "id": "0644f3b5-8e44-4108-8383-448bf34461d3",
     "name": "Leaf house",
     "floors": 2,
     "size": 4,
@@ -36,6 +40,7 @@
     "imagePath": "assets/housing-kits/leafhouse.png"
   },
   {
+    "id": "b00b3270-257f-4e69-8e47-3c0b0983b1be",
     "name": "Sand den",
     "floors": 1,
     "size": 1,
@@ -45,6 +50,7 @@
     "imagePath": "assets/housing-kits/sandden.png"
   },
   {
+    "id": "2464da37-20c9-4e79-9eef-628f823780ed",
     "name": "Sand hut",
     "floors": 1,
     "size": 1,
@@ -54,6 +60,7 @@
     "imagePath": "assets/housing-kits/sandhut.png"
   },
   {
+    "id": "1b892ae8-8188-4b29-b3d8-3e979eac9e8b",
     "name": "Sand cottage",
     "floors": 1,
     "size": 2,
@@ -63,6 +70,7 @@
     "imagePath": "assets/housing-kits/sandcottage.png"
   },
   {
+    "id": "5a6396cd-9099-4670-8dbc-1119d28302c4",
     "name": "Sand house",
     "floors": 2,
     "size": 4,
@@ -72,6 +80,7 @@
     "imagePath": "assets/housing-kits/sandhouse.png"
   },
   {
+    "id": "be17cc25-beb1-48d2-b304-7a65dd59910f",
     "name": "Stone den",
     "floors": 1,
     "size": 1,
@@ -81,6 +90,7 @@
     "imagePath": "assets/housing-kits/stoneden.png"
   },
   {
+    "id": "418b3524-67b6-4428-a914-6776ee4d4c92",
     "name": "Stone hut",
     "floors": 1,
     "size": 1,
@@ -90,6 +100,7 @@
     "imagePath": "assets/housing-kits/stonehut.png"
   },
   {
+    "id": "b9054634-dbc1-4476-9890-4a7d9adf9c4b",
     "name": "Stone cottage",
     "floors": 1,
     "size": 2,
@@ -99,6 +110,7 @@
     "imagePath": "assets/housing-kits/stonecottage.png"
   },
   {
+    "id": "14955c02-1276-4ccc-a1e0-fcf666bb917b",
     "name": "Stone house",
     "floors": 2,
     "size": 4,
@@ -108,6 +120,7 @@
     "imagePath": "assets/housing-kits/stonehouse.png"
   },
   {
+    "id": "8f987f58-d291-46cb-8504-de1abfda4405",
     "name": "City den",
     "floors": 1,
     "size": 1,
@@ -117,6 +130,7 @@
     "imagePath": "assets/housing-kits/cityden.png"
   },
   {
+    "id": "096624da-9635-4a16-a8c2-eb463bdf9f0d",
     "name": "City hut",
     "floors": 1,
     "size": 1,
@@ -126,6 +140,7 @@
     "imagePath": "assets/housing-kits/cityhut.png"
   },
   {
+    "id": "3270eaea-8212-4ef7-8353-aa589b2f4154",
     "name": "City cottage",
     "floors": 1,
     "size": 2,
@@ -135,6 +150,7 @@
     "imagePath": "assets/housing-kits/citycottage.png"
   },
   {
+    "id": "1e2c4134-49ec-47e2-bbcf-a914fb4b41ed",
     "name": "City house",
     "floors": 2,
     "size": 4,

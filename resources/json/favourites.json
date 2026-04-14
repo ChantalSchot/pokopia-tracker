@@ -1,5 +1,6 @@
 [
   {
+    "id": "72f69abb-09a0-4a54-97fb-cd6225850482",
     "name": "blocky stuff",
     "items": [
       "Wall storage box",
@@ -72,6 +73,7 @@
     ]
   },
   {
+    "id": "65f4df4c-d216-4f01-afa6-6e099dfd921f",
     "name": "cleanliness",
     "items": [
       "Waterproof seat",
@@ -89,6 +91,7 @@
     ]
   },
   {
+    "id": "3f250e6e-c27c-4cf0-9951-7a2de2a1c998",
     "name": "colorful stuff",
     "items": [
       "Pokémetal",
@@ -169,6 +172,7 @@
     ]
   },
   {
+    "id": "8cab66c9-9d7a-47ac-a60b-31a30fd12816",
     "name": "complicated stuff",
     "items": [
       "Pencil holder",
@@ -211,6 +215,7 @@
     ]
   },
   {
+    "id": "3263a863-3919-446e-945b-5acaf151c28f",
     "name": "construction",
     "items": [
       "Sandbags",
@@ -223,6 +228,7 @@
     ]
   },
   {
+    "id": "a667cd39-e274-4e6c-8497-87d79f2b54ca",
     "name": "containers",
     "items": [
       "Wall storage box",
@@ -286,6 +292,7 @@
     ]
   },
   {
+    "id": "31fd6ba4-07f1-4702-b606-663a682a65e7",
     "name": "cute stuff",
     "items": [
       "Poké Ball Chest",
@@ -347,6 +354,7 @@
     ]
   },
   {
+    "id": "cf8a17b0-4790-4714-ac17-57cc80de7516",
     "name": "electronics",
     "items": [
       "Gaming fridge",
@@ -425,6 +433,7 @@
     ]
   },
   {
+    "id": "66835606-43f6-4716-b876-4f3310a5fc36",
     "name": "exercise",
     "items": [
       "Punching game",
@@ -434,6 +443,7 @@
     ]
   },
   {
+    "id": "d17097a9-92a2-4e3f-b717-258c22b67e45",
     "name": "fabric",
     "items": [
       "Fluff",
@@ -507,6 +517,7 @@
     ]
   },
   {
+    "id": "a120e7ac-e9e9-41a8-9573-dfd672cf9884",
     "name": "garbage",
     "items": [
       "Nonburnable garbage",
@@ -527,6 +538,7 @@
     ]
   },
   {
+    "id": "dbbac61a-4349-4f48-8817-e26f2e763f27",
     "name": "gatherings",
     "items": [
       "Office shelf",
@@ -570,6 +582,7 @@
     ]
   },
   {
+    "id": "80f0f125-2d7c-4c98-af6a-ecbbe027b6f4",
     "name": "glass stuff",
     "items": [
       "Sea glass fragments",
@@ -651,6 +664,7 @@
     ]
   },
   {
+    "id": "fa47b71e-7342-4859-8558-21b9ba9b2398",
     "name": "group activities",
     "items": [
       "Wooden bench",
@@ -707,6 +721,7 @@
     ]
   },
   {
+    "id": "ad4edc26-a133-4449-94fd-a3cd5899568d",
     "name": "hard stuff",
     "items": [
       "Stone",
@@ -759,6 +774,7 @@
     ]
   },
   {
+    "id": "6cceb57a-60eb-4f4e-b3d3-666e601e767b",
     "name": "healing",
     "items": [
       "Humidifier",
@@ -766,6 +782,7 @@
     ]
   },
   {
+    "id": "821f9539-b00a-43c5-921b-15d3239c946c",
     "name": "letters and words",
     "items": [
       "Office shelf",
@@ -799,6 +816,7 @@
     ]
   },
   {
+    "id": "0c2dc575-f3a7-4679-b9cb-dab097915274",
     "name": "looks like food",
     "items": [
       "Berry case",
@@ -827,6 +845,7 @@
     ]
   },
   {
+    "id": "ef33a699-8cee-4bb8-9199-43e6afb9543e",
     "name": "lots of dirt",
     "items": [
       "Red paint",
@@ -868,6 +887,7 @@
     ]
   },
   {
+    "id": "7c623ff1-5849-4908-8eba-24924813c6e2",
     "name": "lots of fire",
     "items": [
       "Cooking stove",
@@ -885,6 +905,7 @@
     ]
   },
   {
+    "id": "9b953989-94a9-4fd6-a0f0-6240b4f1ac5f",
     "name": "lots of nature",
     "items": [
       "Berry case",
@@ -918,6 +939,7 @@
     ]
   },
   {
+    "id": "e1a8428c-77f5-4254-b0b8-1202926799b8",
     "name": "lots of water",
     "items": [
       "Resort hammock",
@@ -946,6 +968,7 @@
     ]
   },
   {
+    "id": "47e7dbf3-1a75-478a-bd84-6e879f8fd976",
     "name": "luxury",
     "items": [
       "Antique chest",
@@ -983,6 +1006,7 @@
     ]
   },
   {
+    "id": "333f7527-63a5-4d92-a549-96326e61c90a",
     "name": "metal stuff",
     "items": [
       "Copper ore",
@@ -1099,6 +1123,7 @@
     ]
   },
   {
+    "id": "0406664d-01b5-48f3-b92b-5022ea048b90",
     "name": "nice breezes",
     "items": [
       "Fan",
@@ -1112,6 +1137,7 @@
     ]
   },
   {
+    "id": "4fe0fb4b-a9d9-4456-a47a-95e069533040",
     "name": "noisy stuff",
     "items": [
       "Alarm Clock",
@@ -1132,6 +1158,7 @@
     ]
   },
   {
+    "id": "f6f08e98-dcc5-4c1d-b31c-763d5a7baa74",
     "name": "ocean vibes",
     "items": [
       "Resort stool",
@@ -1151,6 +1178,7 @@
     ]
   },
   {
+    "id": "8fdcba7b-ba4e-4cae-ae74-164ce23126ac",
     "name": "play spaces",
     "items": [
       "Arcade machine",
@@ -1175,6 +1203,7 @@
     ]
   },
   {
+    "id": "f0f12fbe-e4a0-46de-932f-3012567a2318",
     "name": "pretty flowers",
     "items": [
       "Small vase",
@@ -1234,6 +1263,7 @@
     ]
   },
   {
+    "id": "f542e0b7-a1c0-4f2b-b0a9-09ad5ca1c007",
     "name": "rides",
     "items": [
       "Step stool",
@@ -1244,6 +1274,7 @@
     ]
   },
   {
+    "id": "249c85ce-bbbd-4cdf-b1f2-b689ed36e08a",
     "name": "round stuff",
     "items": [
       "Fluff",
@@ -1361,12 +1392,14 @@
     ]
   },
   {
+    "id": "fec0fb78-c5e6-4d58-9c91-0b13f2d40586",
     "name": "sharp stuff",
     "items": [
       "Vending machine"
     ]
   },
   {
+    "id": "fe18dc7c-74c3-4d3b-adc6-d7cb5bbfdd81",
     "name": "shiny stuff",
     "items": [
       "Crystal fragment",
@@ -1430,6 +1463,7 @@
     ]
   },
   {
+    "id": "12ed8dcb-89ce-48ed-a290-546e43c373d4",
     "name": "slender objects",
     "items": [
       "Vine rope",
@@ -1474,6 +1508,7 @@
     ]
   },
   {
+    "id": "9f311524-4b52-4e68-b17c-8cd0d5f971d6",
     "name": "soft stuff",
     "items": [
       "Squishy clay",
@@ -1540,6 +1575,7 @@
     ]
   },
   {
+    "id": "7d87138c-6993-420a-898f-8705ec163212",
     "name": "spinning stuff",
     "items": [
       "Fancy chair",
@@ -1556,6 +1592,7 @@
     ]
   },
   {
+    "id": "57f6b83b-471b-429f-9af7-874ebcee682c",
     "name": "spooky stuff",
     "items": [
       "Luxury chair",
@@ -1571,6 +1608,7 @@
     ]
   },
   {
+    "id": "6ae78aaf-e154-4501-abc5-737d26fef4e4",
     "name": "stone stuff",
     "items": [
       "Stone",
@@ -1626,6 +1664,7 @@
     ]
   },
   {
+    "id": "5a6ae00f-f06a-4f0c-8931-6f12b1c15956",
     "name": "strange stuff",
     "items": [
       "Armor fragment",
@@ -1723,6 +1762,7 @@
     ]
   },
   {
+    "id": "35db8ade-e950-4f39-b1bb-0b244bda552a",
     "name": "symbols",
     "items": [
       "Mug",
@@ -1733,6 +1773,7 @@
     ]
   },
   {
+    "id": "b4030863-d4cc-4b0e-a2ed-50e7ec88ba11",
     "name": "watching stuff",
     "items": [
       "Wall mirror",
@@ -1780,6 +1821,7 @@
     ]
   },
   {
+    "id": "2eba4484-d74a-4966-b253-fc942a7dc9ed",
     "name": "wobbly stuff",
     "items": [
       "Folding chair",
@@ -1804,6 +1846,7 @@
     ]
   },
   {
+    "id": "427e512f-320b-48ce-9411-1e3cbe2a7876",
     "name": "wooden stuff",
     "items": [
       "Storage box",

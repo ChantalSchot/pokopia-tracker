@@ -37,6 +37,22 @@ public class PokemonImporter {
         "All day", "Daytime", "Evening", "Morning", "Nighttime"
     );
 
+    /**
+     * Safely coerces a JSON field value to List<String>.
+     * Handles: null → empty list, String → single-element list, List → as-is.
+     * This is necessary because some pokemon.json records have timeOfDay as a
+     * plain String instead of an array (data quality issue in source JSON).
+     */
+    @SuppressWarnings("unchecked")
+    private List<String> toStringList(Object value) {
+        if (value == null) return new ArrayList<>();
+        if (value instanceof List) return (List<String>) value;
+        if (value instanceof String s) {
+            return s.isBlank() ? new ArrayList<>() : new ArrayList<>(List.of(s));
+        }
+        return new ArrayList<>();
+    }
+
     @SuppressWarnings("unchecked")
     @Transactional
     public void importData() {
@@ -44,49 +60,67 @@ public class PokemonImporter {
             File file = new File(importDataPath, "pokemon.json");
             List<Map<String, Object>> data = objectMapper.readValue(file, new TypeReference<>() {});
 
+            int imported = 0;
+            int skipped = 0;
+
             for (Map<String, Object> entry : data) {
                 UUID id = UUID.fromString((String) entry.get("id"));
-                if (pokemonRepository.existsById(id)) continue;
+                if (pokemonRepository.existsById(id)) {
+                    skipped++;
+                    continue;
+                }
 
                 String name = (String) entry.get("name");
                 boolean isDitto = "Ditto".equalsIgnoreCase(name);
 
-                // Parse types
-                List<String> typeNames = (List<String>) entry.get("types");
-                Set<PokemonType> types = typeNames != null ? typeNames.stream()
-                    .map(PokemonType::fromDisplayName)
-                    .collect(Collectors.toCollection(LinkedHashSet::new)) : new LinkedHashSet<>();
+                // Parse types — always a list in source data, but use safe helper
+                List<String> typeNames = toStringList(entry.get("types"));
+                Set<PokemonType> types = typeNames.stream()
+                    .map(t -> {
+                        try { return PokemonType.fromDisplayName(t); }
+                        catch (Exception e) { log.warn("Unknown type '{}' for pokemon {}", t, name); return null; }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
 
-                // Parse regions
-                List<String> regionNames = (List<String>) entry.get("regions");
-                Set<Region> regions = regionNames != null ? regionNames.stream()
-                    .map(Region::fromDisplayName)
-                    .collect(Collectors.toCollection(LinkedHashSet::new)) : new LinkedHashSet<>();
+                // Parse regions — always a list in source data
+                List<String> regionNames = toStringList(entry.get("regions"));
+                Set<Region> regions = regionNames.stream()
+                    .map(r -> {
+                        try { return Region.fromDisplayName(r); }
+                        catch (Exception e) { log.warn("Unknown region '{}' for pokemon {}", r, name); return null; }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
 
-                // Parse timeOfDay - filter to valid values only
-                List<String> timeOfDayRaw = (List<String>) entry.get("timeOfDay");
-                List<String> timeOfDay = timeOfDayRaw != null ? timeOfDayRaw.stream()
+                // Parse timeOfDay — may be String or List<String> in source data (data quality issue)
+                List<String> timeOfDay = toStringList(entry.get("timeOfDay")).stream()
                     .filter(VALID_TIME_OF_DAY::contains)
-                    .collect(Collectors.toList()) : new ArrayList<>();
+                    .collect(Collectors.toList());
 
                 // Parse specialties
-                List<String> specialtyNames = (List<String>) entry.get("specialties");
+                List<String> specialtyNames = toStringList(entry.get("specialties"));
                 Set<Specialty> specialties = new LinkedHashSet<>();
-                if (specialtyNames != null) {
-                    for (String sName : specialtyNames) {
-                        specialtyRepository.findByNameIgnoreCase(sName)
-                            .ifPresent(specialties::add);
-                    }
+                for (String sName : specialtyNames) {
+                    if (sName == null || sName.isBlank()) continue;
+                    specialtyRepository.findByNameIgnoreCase(sName.trim())
+                        .ifPresentOrElse(
+                            specialties::add,
+                            () -> log.warn("Specialty not found: '{}' for pokemon {}", sName, name)
+                        );
                 }
 
-                // Parse favourites
-                List<String> favouriteNames = (List<String>) entry.get("favourites");
+                // Parse favourites — Ditto gets empty favourites (special player character)
+                List<String> favouriteNames = toStringList(entry.get("favourites"));
                 Set<Favourite> favourites = new LinkedHashSet<>();
-                if (!isDitto && favouriteNames != null) {
+                if (!isDitto) {
                     for (String fName : favouriteNames) {
-                        if ("none".equalsIgnoreCase(fName)) continue;
-                        favouriteRepository.findByNameIgnoreCase(fName)
-                            .ifPresent(favourites::add);
+                        if (fName == null || fName.isBlank() || "none".equalsIgnoreCase(fName)) continue;
+                        favouriteRepository.findByNameIgnoreCase(fName.trim())
+                            .ifPresentOrElse(
+                                favourites::add,
+                                () -> log.warn("Favourite not found: '{}' for pokemon {}", fName, name)
+                            );
                     }
                 }
 
@@ -94,12 +128,17 @@ public class PokemonImporter {
                 String litterDropStr = (String) entry.get("litterDrop");
                 String rarityStr = (String) entry.get("rarity");
 
+                IdealHabitat idealHabitat = null;
+                if (idealHabitatStr != null && !idealHabitatStr.isBlank()) {
+                    try { idealHabitat = IdealHabitat.valueOf(idealHabitatStr.toUpperCase()); }
+                    catch (IllegalArgumentException e) { log.warn("Unknown idealHabitat '{}' for pokemon {}", idealHabitatStr, name); }
+                }
+
                 Pokemon pokemon = Pokemon.builder()
                     .id(id)
                     .number((String) entry.get("number"))
                     .name(name)
-                    .idealHabitat(idealHabitatStr != null && !idealHabitatStr.isBlank() ?
-                        IdealHabitat.valueOf(idealHabitatStr.toUpperCase()) : null)
+                    .idealHabitat(idealHabitat)
                     .litterDrop(LitterDrop.fromDisplayName(litterDropStr))
                     .rarity(Rarity.fromDisplayName(rarityStr))
                     .isEvent(Boolean.TRUE.equals(entry.get("isEvent")))
@@ -113,8 +152,9 @@ public class PokemonImporter {
                     .build();
 
                 pokemonRepository.save(pokemon);
+                imported++;
             }
-            log.info("Imported {} pokemon", data.size());
+            log.info("Imported {} pokemon ({} already existed, skipped)", imported, skipped);
         } catch (IOException e) {
             log.error("Failed to import pokemon", e);
             throw new RuntimeException("Failed to import pokemon", e);

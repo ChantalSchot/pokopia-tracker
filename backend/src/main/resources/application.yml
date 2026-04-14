@@ -52,5 +52,7 @@ springdoc:
 
 logging:
   level:
-    com.pokopia.tracker: INFO
+    com.pokopia.tracker: DEBUG
     org.springframework.security: WARN
+    org.springframework.web.servlet.DispatcherServlet: WARN
+    org.hibernate.SQL: WARN

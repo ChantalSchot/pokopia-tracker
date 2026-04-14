@@ -69,6 +69,11 @@ public class GlobalExceptionHandler {
     }
 
     private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message, HttpServletRequest request) {
+        if (status.is5xxServerError()) {
+            log.error("[{}] {} {} — {}", status.value(), request.getMethod(), request.getRequestURI(), message);
+        } else if (status.is4xxClientError()) {
+            log.warn("[{}] {} {} — {}", status.value(), request.getMethod(), request.getRequestURI(), message);
+        }
         ErrorResponse error = ErrorResponse.builder()
             .timestamp(LocalDateTime.now())
             .status(status.value())

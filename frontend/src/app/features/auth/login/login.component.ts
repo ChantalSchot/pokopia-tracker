@@ -31,10 +31,10 @@ import { AuthService } from '@core/auth/auth.service';
         <mat-card-content>
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Username</mat-label>
-              <input matInput formControlName="username" autocomplete="username">
+              <mat-label>Username or Email</mat-label>
+              <input matInput formControlName="username" placeholder="Username or Email" autocomplete="username">
               @if (form.get('username')?.hasError('required') && form.get('username')?.touched) {
-                <mat-error>Username is required</mat-error>
+                <mat-error>Username or Email is required</mat-error>
               }
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">

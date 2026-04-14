@@ -1,11 +1,5 @@
 # Claude Sonnet Prompt — Build `pokopia-tracker`
 
-Use this prompt with Claude Sonnet to generate a complete, production-ready monorepo for a full-stack web application called `pokopia-tracker`.
-
----
-
-## Prompt to give Claude Sonnet
-
 You are a senior full-stack engineer, software architect, product-minded UX engineer, accessibility specialist, DevOps engineer, QA engineer, and technical writer.
 
 Your job is to generate a **fully working, production-quality monorepo** for a web application named **`pokopia-tracker`**.

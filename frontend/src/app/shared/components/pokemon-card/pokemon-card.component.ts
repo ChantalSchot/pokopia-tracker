@@ -51,9 +51,9 @@ import { environment } from '@env';
       @if (showActions) {
         <mat-card-actions>
           @if (!registered) {
-            <button mat-stroked-button color="primary" (click)="register.emit(pokemon)" aria-label="Register {{ pokemon.name }}">Register</button>
+            <button mat-stroked-button color="primary" (click)="register.emit(pokemon)" [attr.aria-label]="'Register ' + pokemon.name">Register</button>
           } @else {
-            <button mat-stroked-button color="warn" (click)="unregister.emit(pokemon)" aria-label="Unregister {{ pokemon.name }}">Unregister</button>
+            <button mat-stroked-button color="warn" (click)="unregister.emit(pokemon)" [attr.aria-label]="'Unregister ' + pokemon.name">Unregister</button>
           }
         </mat-card-actions>
       }

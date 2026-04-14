@@ -69,7 +69,7 @@ import { HouseDialogComponent } from '../house-dialog/house-dialog.component';
         }
 
         <mat-tab-group>
-          <mat-tab label="Assigned Pok\u00e9mon ({{ house()!.assignedPokemon.length }})">
+          <mat-tab [label]="'Assigned Pokémon (' + house()!.assignedPokemon.length + ')'">
             @if (house()!.assignedPokemon.length === 0) {
               <app-empty-state icon="catching_pokemon" title="No Pok\u00e9mon assigned" message="Use suggestions to find matching Pok\u00e9mon"></app-empty-state>
             } @else {

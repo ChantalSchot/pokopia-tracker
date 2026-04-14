@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  flyway:
+    enabled: false
+jwt:
+  secret: test-secret-key-that-is-at-least-256-bits-long-for-testing
+  access-token-expiration: 900
+  refresh-token-expiration: 604800
+  inactivity-timeout: 10800
+app:
+  assets-path: /tmp/test-assets
+  frontend-url: http://localhost:4300
+  import-data-path: src/test/resources/json

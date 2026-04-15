@@ -213,8 +213,7 @@ Frontend tests use Karma with Jasmine.
 ```sql
 psql -h localhost -p 5433 -U pokopia -d pokopia
 
-INSERT INTO user_roles (user_id, role)
-SELECT id, 'ADMIN' FROM users WHERE username = 'your-username';
+INSERT INTO user_roles (user_id, role) SELECT id, 'ADMIN' FROM users WHERE username = 'Chantal';
 ```
 
 3. Log out and log back in for the new role to take effect.

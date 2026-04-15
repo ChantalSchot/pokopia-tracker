@@ -1,0 +1,709 @@
+You will be creating a full application in this repository: https://github.com/ChantalSchot/pokopia-tracker/tree/feature/full-application - ignore existing files for repository creation - the entire prompt for creating the app can be found here: https://github.com/ChantalSchot/pokopia-tracker/blob/feature/full-application/prompts/prompt-claude.md - import data json files can be found here: https://github.com/ChantalSchot/pokopia-tracker/tree/feature/full-application/resources/json Complete phase 1 of that prompt first, wait with phase 2 until confirmed.
+Good — GitHub is available via the gh CLI. Let me first read the prompt file and JSON resources from the repository to understand what needs to be built.
+Now I have a thorough understanding of all the data. Let me produce the Phase 1 analysis document.
+Here is the full Phase 1 review for pokopia-tracker.
+ -----
+1. Requirement Summary
+Build a full-stack production-quality monorepo web application called pokopia-tracker:
+•	Backend: Java Spring Boot + Spring Data JPA + Spring Security
+•	Frontend: Angular + Angular Material + SCSS design tokens
+•	Database: PostgreSQL
+•	Containerisation: Docker + docker-compose
+•	Non-default ports: frontend 4300, backend 8088, postgres 5433
+•	Auth: email + password with roles USER / ADMIN
+•	Master data loaded from 6 JSON files; admin can reload/export
+•	Full user functionality: dashboard, Pokédex, houses, items, habitats, profile
+•	Admin functionality: user management, master data management, import/export
+•	Comprehensive docs, tests, accessibility (WCAG-oriented), light+dark themes
+ 
+2. Assumptions
+1.	Flavour favourites are the 6 "flavour" names found in pokemon.json but absent from favourites.json: sweet flavors, sour flavors, spicy flavors, bitter flavors, dry flavors, and none. These are used as the 6th favourite for some Pokémon and have no items linked to them. They are treated as a separate FlavourFavourite type (or a flag isFlavour = true) and are never addable to houses.
+2.	Pokémon with favourites: ["none"] (e.g. Ditto) is treated as having 1 flavour-only favourite. Since the prompt says "exactly 6 favourites", this appears to be a data quality issue — see contradictions section below.
+3.	Items are linked to favourites by name — favourites.json contains arrays of item names under each favourite. The mapping relationship is favourite ↔ items[] by name string. This is the canonical source for which item activates which favourite. Items not appearing in any favourite list (most items) are none type for favourite purposes.
+4.	31 item names in favourites.json do not match any name in items.json (e.g. Pokémetal, Poké Ball light — likely encoding artifacts or items not yet in the dataset). These will be imported as-is and logged as warnings during import; no match in items.json means they have no item entity counterpart.
+5.	Favourite-to-item linking will be stored in the database as a join table favourite_items derived from favourites.json. The favourites.json items array = item names that activate this favourite.
+6.	timeOfDay field in pokemon.json has garbled values (e.g. " ", "A", "a", "d", "l", "y"). These appear to be data corruption. Valid values are All day, Daytime, Evening, Morning, Nighttime. Corrupted values will be stored as-is and flagged in import logs; a note will be in docs.
+7.	rarity value "None" will be included as an enum value NONE.
+8.	litterDrop value "" (empty string) = no litter drop; stored as null or enum NONE.
+9.	Regions are derived from pokemon.json regions array, not from a separate dataset. The valid regions are: Bleak Beach, Cloud Island, Palette Town, Rocky Ridges, Sparkling Skylands, Withered Wastelands. They will be represented as a Region enum.
+10.	House capacity for kit type is determined by the housing-kit's size field (integer 1, 2, or 4).
+11.	idealHabitat field on a house is called "habitat" in the UI but maps to the same IdealHabitat enum used on Pokémon (Bright, Cool, Dark, Dry, Humid, Warm). This is separate from the imported Habitat master data entities.
+12.	Password reset via email will use Spring Mail + a simple token table (no 3rd-party service assumed). The user must configure SMTP in .env.
+13.	Asset files exist in resources/assets/ subfolders mirroring the JSON imagePath/spritePath values. The Spring Boot backend will serve static assets from a configured directory, and the frontend will reference them via the backend's static asset base URL.
+14.	Admin seeding: the first admin is set manually in the database (documented); no admin self-registration endpoint.
+15.	JWT-based stateless auth is used, with access tokens (short-lived, ~15 min) and refresh tokens (long-lived, ~7 days) stored in HttpOnly cookies to mitigate XSS.
+ 
+3. Contradictions / Ambiguities / Questions
+A — Flavour favourites and the "exactly 6" rule
+The prompt says each Pokémon has exactly 6 favourites and one is a flavour favourite. However:
+•	Several Pokémon in pokemon.json have only 6 entries, some of which are clearly flavour names (e.g. sweet flavors) — so the rule is satisfied.
+•	Ditto has favourites: ["none"] — only 1 favourite. This contradicts "exactly 6".
+•	Some other Pokémon may have similar issues.
+Recommended decision: Treat "none" as the flavour favourite. For Pokémon with fewer than 6 favourites, treat missing entries as data quality issues and log them during import without failing. Document this explicitly.
+B — Favourite-to-item relationship direction
+favourites.json lists item names under each favourite. items.json has no favourite field. There are 31 item name references in favourites.json that don't exist in items.json (likely Pokémon encoding issues in item names, e.g. Pokémetal vs actual item name).
+Recommended decision: Build the join table from favourites.json. Log mismatches as warnings. No import failure. Admin can reload individual datasets to fix.
+C — Item type "Road" vs UI grouping
+The prompt says items in houses are split by decoration, relaxation, toy, or none. items.json also has type: "Road" and type: "Food". The UI rule mentions only 4 groupings.
+Recommended decision: Map Road and Food to the none/untyped category in house item display. The stored type field retains all original values; the grouping is a display concern.
+D — timeOfDay data corruption
+pokemon.json has garbled timeOfDay values (single letters, spaces). These cannot be mapped to valid enum values.
+Recommended decision: Store raw string value in the database (not as an enum, or as a nullable enum with an UNKNOWN fallback). Log corrupt values during import. This can be cleaned up by an admin after import.
+E — Multiple Pokémon with the same number
+The prompt notes habitats link Pokémon by number string, and multiple Pokémon can share the same number. Data analysis shows 310 Pokémon — it should be verified if duplicates exist.
+Recommended decision: number is not unique in the database schema. Habitat-to-Pokémon linkage is done by matching number string to pokemon.number, returning all matches.
+F — Password reset email infrastructure
+The prompt requires password reset via email but does not specify a mail provider.
+Recommended decision: Use Spring Mail with configurable SMTP (documented in .env.example). If SMTP is not configured, the reset token is logged to server logs in development mode.
+G — idealHabitat as enum — housing-kits.json has no idealHabitat
+Housing kits don't have an idealHabitat; only Pokémon and (optionally) houses do. The house's idealHabitat is independently set by the user from the enum.
+H — House size for custom type
+Custom houses have capacity 4. size is never directly editable. Width/depth/height are editable for custom houses, but size is derived or fixed at null/not applicable.
+Recommended decision: size is stored only for kit and habitat type houses (copied from their source at creation). For custom houses, size is null and capacity is hardcoded to 4.
+I — habitat type house and habitat dataset coupling
+The prompt says a habitat type house "references a habitat record for source information such as size" but capacity is 1 for habitat houses — habitat records don't have a size field in habitats.json.
+Recommended decision: habitat type houses have a reference to a Habitat entity (optional FK), used for display/informational purposes only. Capacity is always 1 for habitat houses regardless of the habitat record.
+ 
+4. Recommended Decisions
+Decision	Choice
+Auth model	JWT stateless, access + refresh tokens in HttpOnly cookies
+Flavour favourites	The 6 flavour names (*flavors, none) are isFlavour=true entries, not in favourites.json but stored in the favourite table
+Favourite-item link	Join table derived from favourites.json items lists, by name matching
+timeOfDay	Stored as VARCHAR; enum attempted, fallback to raw string with UNKNOWN
+litterDrop enum	Empty string → NONE enum; valid values enumerated
+House size for custom	null, capacity hardcoded to 4
+Habitat house reference	Optional FK to habitats table, informational only
+Regions	Region Java enum (6 values)
+IdealHabitat	IdealHabitat Java enum (6 values: Bright, Cool, Dark, Dry, Humid, Warm)
+Import strategy	Upsert by source id (UUID from JSON), idempotent, admin-reloadable
+Assets	Served as static files via Spring Boot; configurable base path in .env
+Password reset	Spring Mail + DB token table; SMTP configurable
+Pokémon with <6 favourites	Imported as-is, logged as data warning, no failure
+ 
+5. Proposed Architecture
+text
+┌─────────────────────────────────────────────────────┐
+│                  Browser (Angular SPA)               │
+│  Port 4300  │  Angular Material  │  SCSS Design Tokens│
+└────────────────────────┬────────────────────────────┘
+                         │ REST/JSON (HTTP)
+                         ▼
+┌─────────────────────────────────────────────────────┐
+│         Spring Boot REST Backend  (Port 8088)        │
+│  Controllers → Services → Repositories → JPA/Hibernate│
+│  Spring Security (JWT filter chain)                  │
+│  Import Service  │  Export Service  │  Mail Service  │
+└────────────────────────┬────────────────────────────┘
+                         │ JDBC
+                         ▼
+┌─────────────────────────────────────────────────────┐
+│           PostgreSQL (Port 5433 external)            │
+└─────────────────────────────────────────────────────┘
+•	Angular SPA with lazy-loaded feature modules, route guards, auth interceptor
+•	Spring Boot with clear package structure: controller, service, repository, domain, dto, mapper, security, config, exception, importer, exporter
+•	Flyway for DB migrations (versioned SQL scripts)
+•	OpenAPI/Swagger UI at /api/swagger-ui.html
+•	Docker Compose with services: db, backend, frontend
+ 
+6. Proposed Entity Model
+Core Entities
+User
+•	id UUID PK
+•	username VARCHAR UNIQUE NOT NULL
+•	email VARCHAR UNIQUE NOT NULL
+•	passwordHash VARCHAR NOT NULL
+•	roles Set<Role> (enum: USER, ADMIN)
+•	registeredPokemonIds Set<UUID> → Pokémon entity IDs
+•	createdAt, updatedAt
+Pokemon (master data)
+•	id UUID PK (from JSON)
+•	number VARCHAR (e.g. #001, NOT unique)
+•	name VARCHAR
+•	idealHabitat IdealHabitat enum
+•	litterDrop LitterDrop enum (nullable)
+•	rarity Rarity enum
+•	isEvent BOOLEAN
+•	timeOfDay VARCHAR (raw, see ambiguity D)
+•	spritePath VARCHAR
+•	types Set<PokemonType> enum values → join table
+•	specialties ManyToMany → Specialty
+•	regions Set<Region> enum values → join table
+•	favourites ManyToMany → Favourite (exactly 6, one with isFlavour=true)
+Favourite (master data)
+•	id UUID PK (from JSON, or generated for flavour favourites)
+•	name VARCHAR UNIQUE
+•	isFlavour BOOLEAN (true for the 6 flavour names + none)
+•	items ManyToMany → Item (empty for flavour favourites)
+Item (master data)
+•	id UUID PK (from JSON)
+•	name VARCHAR
+•	description VARCHAR
+•	category VARCHAR
+•	obtainMethod VARCHAR
+•	obtainDetails VARCHAR
+•	type ItemType enum (Decoration, Food, Relaxation, Road, Toy, null→NONE)
+•	colour VARCHAR
+•	imagePath VARCHAR
+•	(no usedInHabitats, no craftingRecipeId)
+Specialty (master data)
+•	id UUID PK (from JSON)
+•	name VARCHAR
+•	description VARCHAR
+•	imagePath VARCHAR
+Habitat (master data)
+•	id UUID PK (from JSON)
+•	name VARCHAR
+•	isEvent BOOLEAN
+•	pokemonNumbers Set<VARCHAR> → join table (e.g. ["#001","#025"])
+•	imagePath VARCHAR
+HousingKit (master data)
+•	id UUID PK (from JSON)
+•	name VARCHAR
+•	floors INT
+•	size INT
+•	width INT, depth INT, height INT
+•	imagePath VARCHAR
+House (user-owned)
+•	id UUID PK (generated)
+•	user ManyToOne → User
+•	name VARCHAR (unique per user+region)
+•	description VARCHAR
+•	region Region enum NOT NULL
+•	houseType HouseType enum (HABITAT, CUSTOM, KIT)
+•	idealHabitat IdealHabitat enum (nullable)
+•	width, depth, height INT (editable only for CUSTOM)
+•	size INT (nullable; copied from kit at creation, or null for custom)
+•	housingKit ManyToOne → HousingKit (nullable, for KIT type)
+•	habitat ManyToOne → Habitat (nullable, for HABITAT type, informational)
+•	items ManyToMany → Item
+•	assignedPokemon OneToMany → UserPokemon (derived from UserPokemon.house)
+UserPokemon (user-owned, represents a registered Pokémon)
+•	id UUID PK
+•	user ManyToOne → User
+•	pokemon ManyToOne → Pokemon
+•	house ManyToOne → House (nullable = homeless)
+PasswordResetToken
+•	id UUID PK
+•	user ManyToOne → User
+•	token VARCHAR UNIQUE
+•	expiresAt TIMESTAMP
+RefreshToken
+•	id UUID PK
+•	user ManyToOne → User
+•	token VARCHAR UNIQUE
+•	expiresAt TIMESTAMP
+Enums
+Enum	Values
+Role	USER, ADMIN
+IdealHabitat	BRIGHT, COOL, DARK, DRY, HUMID, WARM
+Region	BLEAK_BEACH, CLOUD_ISLAND, PALETTE_TOWN, ROCKY_RIDGES, SPARKLING_SKYLANDS, WITHERED_WASTELANDS
+HouseType	HABITAT, CUSTOM, KIT
+PokemonType	BUG, DARK, DRAGON, ELECTRIC, FAIRY, FIGHTING, FIRE, FLYING, GHOST, GRASS, GROUND, ICE, NORMAL, POISON, PSYCHIC, ROCK, STEEL, WATER
+Rarity	COMMON, RARE, VERY_RARE, NONE
+LitterDrop	NONE, FLUFF, HONEY, IRON_ORE, LEAF, NONBURNABLE_GARBAGE, SMALL_LOG, SQUISHY_CLAY, STONE, STURDY_STICK, TWINE, VINE_ROPE
+ItemType	DECORATION, FOOD, RELAXATION, ROAD, TOY, NONE
+ 
+7. Proposed Auth/Authz Design
+•	Mechanism: JWT stateless with short-lived access token (15 min) + long-lived refresh token (7 days), both in HttpOnly, SameSite=Strict cookies (mitigates XSS and CSRF)
+•	Registration: POST /api/auth/register — open endpoint
+•	Login: POST /api/auth/login — returns tokens in cookies
+•	Logout: POST /api/auth/logout — clears cookies + invalidates refresh token in DB
+•	Token refresh: POST /api/auth/refresh — validates refresh token, issues new access token
+•	Password reset: POST /api/auth/forgot-password + POST /api/auth/reset-password?token=...
+•	Role checks: @PreAuthorize("hasRole('ADMIN')") on admin endpoints; route guards on Angular side
+•	Password rules: minimum 8 characters, at least 1 uppercase, 1 digit; BCrypt hashing (strength 12)
+•	Future extensibility: Token table is in place for refresh; User.emailVerified boolean prepared; 2FA boolean flag reserved
+ 
+8. Proposed Import Strategy
+•	Import runs at application startup if tables are empty, or on-demand via admin API
+•	Order (respects FK dependencies):
+1.	specialties
+2.	favourites (+ flavour favourites synthesised from Pokémon data)
+3.	items (then build favourite_items join table from favourites.json)
+4.	housing_kits
+5.	habitats
+6.	pokemon (with relations to specialties, favourites, types, regions)
+•	Strategy: Upsert by source id. On reload: delete-and-reinsert per entity type (safe because master data IDs are stable UUIDs from JSON)
+•	Flavour favourites: Synthesised before item import — the 6 flavour names + none are inserted as Favourite records with isFlavour=true and no items
+•	Asset handling: Asset files are served from a configurable ASSET_BASE_PATH. imagePath/spritePath in JSON already begin with assets/.... The backend serves /assets/** as static resources from that path. The frontend references assets via the configured backend base URL. imagePaths and spritePaths can be mass-adjusted before first import via environment variable prefix
+•	Logging: Mismatched item names, corrupted timeOfDay, <6 favourites — all logged as WARN, import continues
+ 
+9. Proposed Repository Structure
+text
+pokopia-tracker/
+├── README.md
+├── docker-compose.yml
+├── docker-compose.dev.yml          # dev overrides (hot-reload, no build)
+├── .env.example
+├── .gitignore
+├── docs/
+│   ├── architecture.md
+│   ├── data-model.md
+│   ├── api.md
+│   ├── import-flow.md
+│   ├── testing-strategy.md
+│   ├── configuration.md
+│   └── repository-structure.md
+├── backend/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+│       ├── main/java/com/pokopia/tracker/
+│       │   ├── PokopiaTrackerApplication.java
+│       │   ├── config/
+│       │   ├── controller/
+│       │   ├── domain/entity/
+│       │   ├── domain/enums/
+│       │   ├── dto/request/
+│       │   ├── dto/response/
+│       │   ├── exception/
+│       │   ├── importer/
+│       │   ├── exporter/
+│       │   ├── mapper/
+│       │   ├── repository/
+│       │   ├── security/
+│       │   └── service/
+│       ├── main/resources/
+│       │   ├── application.yml
+│       │   ├── db/migration/     # Flyway SQL scripts
+│       │   └── import/json/      # JSON source files (copied from resources/)
+│       └── test/
+├── frontend/
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── package.json
+│   ├── angular.json
+│   └── src/
+│       ├── app/
+│       │   ├── core/             # auth, interceptors, guards, services
+│       │   ├── shared/           # reusable components, pipes, directives
+│       │   ├── features/
+│       │   │   ├── auth/
+│       │   │   ├── dashboard/
+│       │   │   ├── pokedex/
+│       │   │   ├── houses/
+│       │   │   ├── items/
+│       │   │   ├── habitats/
+│       │   │   ├── profile/
+│       │   │   └── admin/
+│       │   └── app.routes.ts
+│       └── styles/
+│           ├── _tokens.scss      # design tokens
+│           ├── _themes.scss      # light + dark themes
+│           └── _global.scss
+└── resources/
+    ├── json/
+    │   ├── favourites.json
+    │   ├── habitats.json
+    │   ├── housing-kits.json
+    │   ├── items.json
+    │   ├── pokemon.json
+    │   └── specialties.json
+    └── assets/
+        ├── habitats/
+        ├── housing-kits/
+        ├── items/
+        ├── pokemon/
+        └── specialties/
+ 
+10. Proposed API Shape (Summary)
+Group	Method	Path	Auth	Role
+Auth	POST	/api/auth/register	None	-
+Auth	POST	/api/auth/login	None	-
+Auth	POST	/api/auth/logout	Token	USER
+Auth	POST	/api/auth/refresh	Cookie	USER
+Auth	POST	/api/auth/forgot-password	None	-
+Auth	POST	/api/auth/reset-password	Token param	-
+Profile	GET/PUT	/api/users/me	Token	USER
+Profile	PUT	/api/users/me/password	Token	USER
+Pokédex	GET	/api/pokemon	Token	USER
+Pokédex	GET	/api/pokemon/{id}	Token	USER
+Registered	GET	/api/users/me/pokemon	Token	USER
+Registered	POST/DELETE	/api/users/me/pokemon/{pokemonId}	Token	USER
+Houses	GET/POST	/api/houses	Token	USER
+Houses	GET/PUT/DELETE	/api/houses/{id}	Token	USER
+Houses	PUT	/api/houses/{id}/region	Token	USER
+Houses	POST/DELETE	/api/houses/{id}/pokemon/{pokemonId}	Token	USER
+Houses	PUT	/api/houses/{id}/items	Token	USER
+Houses	GET	/api/houses/{id}/suggestions	Token	USER
+Items	GET	/api/items	Token	USER
+Habitats	GET	/api/habitats	Token	USER
+Favourites	GET	/api/favourites	Token	USER
+Specialties	GET	/api/specialties	Token	USER
+Housing Kits	GET	/api/housing-kits	Token	USER
+Dashboard	GET	/api/dashboard	Token	USER
+Admin — Users	GET/POST/PUT/DELETE	/api/admin/users/**	Token	ADMIN
+Admin — Master data	GET/POST/PUT/DELETE	/api/admin/pokemon/** etc.	Token	ADMIN
+Admin — Import	POST	/api/admin/import/{dataset}	Token	ADMIN
+Admin — Import all	POST	/api/admin/import/all	Token	ADMIN
+Admin — Export	GET	/api/admin/export/{dataset}	Token	ADMIN
+Pagination via ?page=0&size=20&sort=name,asc on all list endpoints. Filtering via query params documented per endpoint.
+ 
+11. Edge Cases and Business Rule Clarifications
+1.	Homeless Pokémon: Registered + no house assignment. Shown on dashboard. Pokédex filter available.
+2.	Reassigning a housed Pokémon: Moving to a new house automatically removes it from the previous house. UI must make this explicit with a confirmation prompt.
+3.	House region change: If user changes a house's region, a modal asks: "Move Pokémon with the house to [new region]?" Those that don't move become homeless.
+4.	Deleting a house: Assigned Pokémon become homeless. Confirmation dialog required.
+5.	House name uniqueness: Enforced per user + region combination. Same name allowed in different regions.
+6.	Suggestions logic:
+•	House is full → no suggestions
+•	House has items → suggest Pokémon whose idealHabitat matches AND whose non-flavour favourites overlap with the active favourites (from items) — ranked by overlap count descending
+•	House has no items → suggest Pokémon whose idealHabitat matches AND whose non-flavour favourites overlap with the non-flavour favourites of Pokémon already in the house — ranked by overlap count
+•	Tie-breaking: alphabetical by Pokémon name
+•	Exclude already-registered-and-housed Pokémon
+7.	Warning state for Pokémon in house: If none of the Pokémon's non-flavour favourites are active in the house (i.e. no item in the house links to any of that Pokémon's favourites), show a warning. Flavour favourites are excluded from this check — they never activate and never count for or against the warning.
+8.	Flavour favourite in house: Never addable to a house. UI must not show flavour favourites in the "active favourites" list or suggest items for them.
+9.	Capacity enforcement: Assignment rejected with 409 Conflict if house is at or over capacity.
+10.	Duplicate registration: Registering an already-registered Pokémon is a no-op or returns 200 OK (idempotent).
+11.	Admin data reload: Reload is upsert; user-owned data (houses, registrations) is never affected by import reload.
+12.	timeOfDay corrupted values: Imported as raw string UNKNOWN or stored verbatim; shown in UI as "—" or "Unknown".
+13.	Ditto's single "none" favourite: Imported as-is with isFlavour=true. No warning during import as this is the known data state.
+14.	Item-favourite mismatches (31 names): Logged at WARN. Items exist in the DB but have no favourite link for those specific names. No functional impact.
+ 
+Confirmation Request
+The above Phase 1 analysis is complete. Before any code is generated, please confirm the following (or raise corrections):
+1.	Flavour favourites — the 6 flavour names (sweet/sour/spicy/bitter/dry flavors, none) are treated as isFlavour=true favourites with no item links. Agreed?
+2.	JWT in HttpOnly cookies — access token (15 min) + refresh token (7 days). Agreed?
+3.	timeOfDay stored as raw VARCHAR (not enum) due to corrupted data. Agreed?
+4.	Upsert-by-id import strategy with delete-and-reinsert per dataset on reload. Agreed?
+5.	Flyway for DB migrations. Agreed?
+6.	Spring Mail for password reset with configurable SMTP. Agreed?
+7.	No changes to the mandatory tech stack (Java Spring Boot, Angular, Angular Material, PostgreSQL, Docker). Confirmed?
+8.	Any corrections to the entity model, enums, or API shape?
+Once you confirm, Phase 2 (full code generation and push to the repository) will begin.
+-----
+2.4: these items cannot be linked due to the discrepency between "Pokemon" and "Pokémon" (or for example "Pokémetal" vs "Pokemetal". Make sure string matching accounts for this. 2.6 garbled values can be removed from the "timeOfDay" properties in the imported data. 2.13 is there a benefit for using static assets as opposed to loading assets client-side in the angular application? 2.15 inactive users should only timeout after 3 hours of inactivity. long-lived tokens can be active for 7 days. 3.A: Ditto is an edge case, as that is the "user" pokemon in-game, which is still assigned to a house. Ditto should be excluded from the favourites logic. No other pokemon shoul have that issue. 3.C: Item types "road" and "food" can indeed exist, but do not count towards 'favourites' and should be excluded from the logic there. These item types *should* be shown as filterable types within the items page, but these items should be excluded from items to be added to houses. 3.D: use "unknown" enum value for the garbled data. 3.H capacity should be derived from "size" in housing kits. Habitat and "custom" size (capacity) is always 1. house region change: should ask the user which pokemon to move with the house through a checklist on the assigned pokemon. Only those "checked" should be moved, others should become homeless. All pokemon should be checked by default. 6. suggestion logic: ensure unregistered pokemon cannot be suggested. Confirmation request: 1. Exclude the "none" flavour for ditto - leave his "favourites" array empty and ensure this edge case is covered correctly. Ditto should never be suggested and should not be included for "matching" logic as this is the player in the game. If confirmation is not covered in above response: agreed. Now, start fully generating everything and push to the "feature/full-application" branch in the repository.
+
+-----
+I'll now start Phase 2 — full code generation and push to the repository. This is a large monorepo so I'll work through it systematically.
+Now I'll spawn the coding subagent with all the context it needs to generate the full application.
+Generate full Pokopia Tracker monorepo and push to GitHub
+Claude Code
+You are generating a complete, production-quality monorepo for "pokopia-tracker" and pushing ALL files to the feature/full-application branch of https://github.com/ChantalSchot/pokopia-tracker.
+CRITICAL INSTRUCTIONS
+1.	Read /home/user/workspace/pokopia/PHASE1_DECISIONS.md FIRST — it contains all architecture decisions, confirmed data model, and business rules
+2.	Read all JSON source files in /home/user/workspace/pokopia/resources/json/ to understand the data structures
+3.	Generate COMPLETE, RUNNABLE code — no stubs, no TODOs, no pseudo-code
+4.	Push ALL files to the feature/full-application branch using gh CLI
+5.	The repo already has some files — ignore them, overwrite/add as needed for the full application
+GIT WORKFLOW
+•	Clone the repo: git clone https://github.com/ChantalSchot/pokopia-tracker.git /tmp/pokopia-tracker
+•	Checkout the branch: cd /tmp/pokopia-tracker && git checkout feature/full-application || git checkout -b feature/full-application
+•	Generate all files into /tmp/pokopia-tracker/
+•	Commit and push in logical batches (don't try to push everything in one giant commit)
+•	Use git add -A && git commit -m "message" && git push origin feature/full-application in batches
+STRUCTURE TO GENERATE
+Generate this exact structure (see PHASE1_DECISIONS.md for full details):
+text
+pokopia-tracker/
+├── README.md
+├── docker-compose.yml
+├── docker-compose.dev.yml
+├── .env.example
+├── .gitignore
+├── docs/
+│   ├── architecture.md
+│   ├── data-model.md
+│   ├── api.md
+│   ├── import-flow.md
+│   ├── testing-strategy.md
+│   ├── configuration.md
+│   └── repository-structure.md
+├── backend/
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+│       ├── main/java/com/pokopia/tracker/
+│       └── main/resources/
+│           ├── application.yml
+│           └── db/migration/   (Flyway V1, V2... scripts)
+├── frontend/
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── package.json
+│   ├── angular.json
+│   └── src/
+└── resources/
+    └── json/ (copy from /home/user/workspace/pokopia/resources/json/)
+BACKEND — Spring Boot 3.x, Java 21
+Package structure: com.pokopia.tracker
+•	PokopiaTrackerApplication.java
+•	config/: SecurityConfig, JwtConfig, WebConfig (CORS, static resources), OpenApiConfig, MailConfig
+•	security/: JwtTokenProvider, JwtAuthenticationFilter, UserDetailsServiceImpl, CookieUtil
+•	domain/entity/: User, Pokemon, Favourite, Item, Specialty, Habitat, HousingKit, House, UserPokemon, PasswordResetToken, RefreshToken
+•	domain/enums/: Role, IdealHabitat, Region, HouseType, PokemonType, Rarity, LitterDrop, ItemType
+•	dto/request/: RegisterRequest, LoginRequest, UpdateProfileRequest, ChangePasswordRequest, ForgotPasswordRequest, ResetPasswordRequest, CreateHouseRequest, UpdateHouseRequest, ChangeHouseRegionRequest, UpdateHouseItemsRequest, AssignPokemonRequest
+•	dto/response/: UserResponse, PokemonResponse, FavouriteResponse, ItemResponse, SpecialtyResponse, HabitatResponse, HousingKitResponse, HouseResponse, HouseSuggestionsResponse, DashboardResponse, PageResponse, ErrorResponse
+•	mapper/: (use MapStruct or manual mappers)
+•	repository/: All Spring Data JPA repositories
+•	service/: AuthService, UserService, PokemonService, HouseService, ItemService, HabitatService, FavouriteService, SpecialtyService, HousingKitService, DashboardService, SuggestionService, ImportService, ExportService, MailService, RefreshTokenService
+•	controller/: AuthController, UserController, PokemonController, HouseController, ItemController, HabitatController, FavouriteController, SpecialtyController, HousingKitController, DashboardController, AdminUserController, AdminMasterDataController, AdminImportController, AdminExportController
+•	importer/: DataImporter, PokemonImporter, FavouriteImporter, ItemImporter, HabitatImporter, HousingKitImporter, SpecialtyImporter, ImportNormalizer (unicode normalization)
+•	exporter/: DataExporter (generates JSON from DB entities)
+•	exception/: GlobalExceptionHandler, ResourceNotFoundException, BusinessRuleException, UnauthorizedException, ConflictException
+Key implementation details:
+•	JWT: io.jsonwebtoken (jjwt 0.12.x). Access token 15min, refresh token 7 days. Both in HttpOnly cookies named access_token and refresh_token. Inactivity: update lastUsedAt on refresh token, consider 3hr inactivity as expired.
+•	Spring Security: permit /api/auth/, /swagger-ui/, /v3/api-docs/**. All others require auth. Admin endpoints require ADMIN role.
+•	Flyway migrations in src/main/resources/db/migration/: V1__init_schema.sql (all tables), V2__constraints.sql (if needed)
+•	Import: DataImporter runs at startup (ApplicationRunner) if pokemon table empty. Upsert logic: saveIfAbsent or deleteAllAndSave per dataset. Unicode normalization for item-favourite matching.
+•	Ditto: After importing pokemon, find the one with name="Ditto", set isDitto=true, clear its favourites, save.
+•	TimeOfDay: filter imported values, only keep: "All day", "Daytime", "Evening", "Morning", "Nighttime"
+•	Suggestion endpoint: GET /api/houses/{id}/suggestions returns list of PokemonResponse
+•	Active favourites: GET /api/houses/{id}/active-favourites returns list of FavouriteResponse
+•	House capacity: computed method in House entity. KIT → housingKit.size, HABITAT/CUSTOM → 1
+•	House region change payload: ChangeHouseRegionRequest { newRegion: Region, pokemonIdsToMove: List<UUID> }
+•	Warning: Pokemon in house has no non-flavour favourites matching any active favourite → warn=true field on UserPokemonResponse
+•	Error response: { timestamp, status, error, message, path }
+•	Pagination: all list endpoints return PageResponse<T> with { content, totalElements, totalPages, page, size }
+•	OpenAPI: springdoc-openapi-starter-webmvc-ui:2.x, available at /swagger-ui.html
+•	CORS: Allow http://localhost:4300 in dev
+pom.xml dependencies:
+•	spring-boot-starter-web
+•	spring-boot-starter-data-jpa
+•	spring-boot-starter-security
+•	spring-boot-starter-validation
+•	spring-boot-starter-mail
+•	spring-boot-starter-actuator
+•	springdoc-openapi-starter-webmvc-ui:2.5.0
+•	jjwt-api:0.12.6 + jjwt-impl + jjwt-jackson
+•	postgresql driver
+•	flyway-core + flyway-database-postgresql
+•	jackson-databind (for JSON import parsing)
+•	lombok
+•	mapstruct + mapstruct-processor
+application.yml:
+text
+server:
+  port: 8088
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/pokopia}
+    username: ${DB_USERNAME:pokopia}
+    password: ${DB_PASSWORD:pokopia}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+jwt:
+  secret: ${JWT_SECRET:changeme-very-long-secret-key-at-least-256-bits}
+  access-token-expiration: 900  # 15 min in seconds
+  refresh-token-expiration: 604800  # 7 days in seconds
+  inactivity-timeout: 10800  # 3 hours in seconds
+app:
+  assets-path: ${ASSETS_PATH:resources/assets}
+  frontend-url: ${FRONTEND_URL:http://localhost:4300}
+FRONTEND — Angular 17+ standalone
+Setup
+•	Use standalone components throughout (no NgModules except app.config.ts)
+•	Angular Material 17+
+•	Angular 17+ with app.config.ts (provideRouter, provideHttpClient with interceptors, provideAnimations)
+•	SCSS with design tokens in styles/_tokens.scss
+Structure: src/app/
+•	core/
+•	auth/: AuthService, auth.guard.ts, admin.guard.ts, auth.interceptor.ts (attaches cookies), token-refresh.interceptor.ts
+•	services/: PokemonService, HouseService, ItemService, HabitatService, FavouriteService, SpecialtyService, HousingKitService, DashboardService, AdminService
+•	models/: All TypeScript interfaces matching backend DTOs
+•	shared/
+•	components/: pokemon-card, house-card, habitat-card, item-card, loading-spinner, empty-state, confirm-dialog, page-header, filter-sidebar
+•	pipes/: capitalize, type-badge-color
+•	directives/: (accessibility helpers if needed)
+•	features/
+•	auth/: login, register, forgot-password, reset-password components
+•	dashboard/: dashboard component
+•	pokedex/: pokedex component, pokemon-detail-dialog
+•	houses/: houses component, house-dialog (create/edit), house-detail (view/manage), region-change-dialog, pokemon-select-dialog
+•	items/: items component
+•	habitats/: habitats component
+•	profile/: profile component
+•	admin/: admin-layout, admin-users, admin-pokemon, admin-items, admin-favourites, admin-habitats, admin-specialties, admin-housing-kits, admin-import
+Routes (app.routes.ts):
+•	/ → redirect to /login if not authed, /dashboard if authed
+•	/login, /register, /forgot-password, /reset-password → public
+•	/dashboard, /pokedex, /houses, /items, /habitats, /profile → authGuard
+•	/admin/** → authGuard + adminGuard
+Auth flow:
+•	AuthService stores user state (role, username) in memory (from JWT claims decoded)
+•	HTTP interceptor automatically includes credentials: true (for cookies)
+•	401 response → token refresh attempt → retry → if still 401 → logout
+•	AuthGuard: checks AuthService.isLoggedIn(); if not → navigate to /login
+•	AdminGuard: checks AuthService.isAdmin(); if not → navigate to /dashboard
+Key UI patterns:
+•	Top nav bar with hamburger menu on mobile (Angular Material sidenav/toolbar)
+•	Filters sidebar fixed on right on desktop (min-width: 1024px), collapsible on mobile
+•	Pokemon cards: sprite image, name, number, type chips, specialty icons
+•	Registered state: visually distinct border/badge
+•	Homeless state: distinct indicator (e.g. house-with-slash icon or color)
+•	Warning state on house pokemon: warning icon/amber color if no active favourites match
+•	House card: name, region, type, capacity bar, active favourites count
+•	Loading: MatProgressSpinner
+•	Success: MatSnackBar
+•	Errors: MatSnackBar or inline error messages
+•	Modals: MatDialog
+SCSS Design Tokens (_tokens.scss):
+text
+// Light theme
+--color-primary: #2E7D32 (deep green)
+--color-primary-light: #60AD5E
+--color-accent: #F9A825 (amber)
+--color-background: #FAFAF5 (warm ivory)
+--color-surface: #FFFFFF
+--color-text-primary: #1A1A1A
+--color-text-secondary: #555555
+--color-warning: #FF8F00
+--color-error: #D32F2F
+--color-success: #388E3C
+--color-border: #E0E0D8
+
+// Dark theme  
+--color-primary: #66BB6A
+--color-accent: #FFD54F
+--color-background: #121212
+--color-surface: #1E1E1E
+--color-text-primary: #F5F5F0
+--color-text-secondary: #AAAAAA
+Environment files:
+•	environment.ts: { apiUrl: 'http://localhost:8088', production: false }
+•	environment.prod.ts: { apiUrl: '', production: true } (relative URL for same-origin in prod)
+DOCKER SETUP
+docker-compose.yml:
+text
+services:
+  db:
+    image: postgres:16-alpine
+    ports: ["5433:5432"]
+    environment:
+      POSTGRES_DB: pokopia
+      POSTGRES_USER: pokopia
+      POSTGRES_PASSWORD: pokopia
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+  backend:
+    build: ./backend
+    ports: ["8088:8088"]
+    depends_on: [db]
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/pokopia
+      DB_USERNAME: pokopia
+      DB_PASSWORD: pokopia
+      JWT_SECRET: ${JWT_SECRET}
+      ASSETS_PATH: /app/resources/assets
+    volumes:
+      - ./resources:/app/resources:ro
+  
+  frontend:
+    build: ./frontend
+    ports: ["4300:80"]
+    depends_on: [backend]
+backend/Dockerfile (multi-stage):
+text
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src ./src
+RUN mvn package -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
+frontend/Dockerfile (multi-stage with nginx):
+text
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build -- --configuration production
+
+FROM nginx:alpine
+COPY --from=build /app/dist/pokopia-tracker/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+nginx.conf: proxy /api to backend:8088, serve Angular app for all other routes
+TESTS
+Backend tests (src/test/java/com/pokopia/tracker/):
+•	service/HouseServiceTest.java — test capacity, suggestion logic, region change, warning logic
+•	service/ImportNormalizerTest.java — test unicode normalization matching
+•	service/SuggestionServiceTest.java — test suggestion algorithm, Ditto exclusion
+•	controller/AuthControllerTest.java — test register, login, logout, refresh
+•	controller/HouseControllerTest.java — test CRUD, security
+•	importer/DataImporterTest.java — test import, Ditto handling, timeOfDay filtering
+Frontend tests (src/app/**/*.spec.ts):
+•	core/auth/auth.service.spec.ts
+•	core/auth/auth.guard.spec.ts
+•	features/houses/house.service.spec.ts — test active favourites computation
+•	shared/components/pokemon-card/pokemon-card.component.spec.ts
+DOCS (generate all in /docs/)
+•	README.md (root): full setup guide, ports, Docker usage, non-Docker dev, env vars, import flow, tests, troubleshooting
+•	docs/architecture.md: system overview, component responsibilities, auth flow, data flow
+•	docs/data-model.md: all entities, enums, relationships, constraints, JSON-to-entity mapping
+•	docs/api.md: full endpoint catalog with method, path, auth, request/response DTOs, validation, error cases
+•	docs/import-flow.md: import order, normalization, Ditto handling, timeOfDay filtering, asset handling
+•	docs/testing-strategy.md: test approach, how to run tests
+•	docs/configuration.md: all env vars with examples
+•	docs/repository-structure.md: annotated file tree
+PUSH STRATEGY
+Use batched commits. Suggested order:
+1.	docs + root config files (.gitignore, .env.example, docker-compose.yml, README.md)
+2.	backend structure + pom.xml + application.yml + Flyway migration
+3.	backend domain (entities + enums)
+4.	backend security + auth
+5.	backend repositories + services
+6.	backend controllers + importers/exporters + tests
+7.	frontend package.json + angular.json + styles
+8.	frontend core (auth, guards, interceptors, services, models)
+9.	frontend shared components
+10.	frontend feature pages
+11.	frontend tests
+12.	resources/json files
+IMPORTANT
+•	Every file must be complete and compilable
+•	No placeholder comments like "// TODO implement this"
+•	Use Lombok @Data, @Builder, @NoArgsConstructor, @AllArgsConstructor on entities and DTOs where appropriate
+•	All backend endpoints return proper HTTP status codes
+•	All Angular components use OnPush change detection where appropriate
+•	Accessibility: aria-labels on all icons, role attributes on interactive elements, visible focus states
+•	The json source files are at /home/user/workspace/pokopia/resources/json/ — copy them to the repo under resources/json/
+Phase 2 is complete. Everything has been pushed to feature/full-application across 15 commits.
+Here's a summary of what was generated:
+What's in the repository
+Backend (106 Java files)
+•	Full Spring Boot 3.x / Java 21 application at port 8088
+•	All entities with correct relationships: User, Pokemon, Favourite, Item, Specialty, Habitat, HousingKit, House, UserPokemon, PasswordResetToken, RefreshToken
+•	All enums: IdealHabitat, Region, HouseType, PokemonType, Rarity, LitterDrop, ItemType, Role
+•	JWT auth with HttpOnly cookies (access 15min, refresh 7 days, 3hr inactivity expiry)
+•	Full import pipeline with unicode normalization for item-favourite linking
+•	Ditto fully excluded from suggestions, warnings, and favourite matching
+•	Suggestion logic, warning logic, active favourites computation (all server + client side)
+•	OpenAPI/Swagger at /swagger-ui.html
+•	Flyway migration V1 for full schema
+Frontend (42 TypeScript files)
+•	Angular 17+ standalone at port 4300
+•	Angular Material + SCSS design tokens with light/dark themes (Pokopia-inspired green/amber palette)
+•	All pages: login, register, dashboard, Pokédex, houses, items, habitats, profile, all admin pages
+•	Filters sidebar fixed-right on desktop, collapsible on mobile
+•	House management with region-change checklist dialog, pokemon assignment, item assignment
+•	Hamburger nav on mobile, full WCAG-oriented accessibility
+Infrastructure & Docs
+•	docker-compose.yml (prod) + docker-compose.dev.yml (hot-reload)
+•	Multi-stage Dockerfiles for backend and frontend (with nginx proxy)
+•	.env.example with all configurable variables
+•	6 documentation files covering architecture, data model, API catalog, import flow, testing strategy, configuration
+To get started
+bash
+git clone https://github.com/ChantalSchot/pokopia-tracker.git
+cd pokopia-tracker
+git checkout feature/full-application
+cp .env.example .env   # fill in JWT_SECRET at minimum
+docker-compose up --build
+Then open http://localhost:4300.
+
